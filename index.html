@@ -1,5 +1,5 @@
 <!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0e7a52"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png">
+<meta name="theme-color" content="#0b1628"><link rel="stylesheet" href="leaflet.css"><script src="leaflet.js"></script><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="GhépXe">
 <meta name="description" content="Bản demo phần mềm quản lý nhà xe ghép: tổng đài, chủ hãng, tài xế, khách hàng.">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px;font-family:system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
@@ -405,7 +405,7 @@ body::before{background:var(--nav)}
 .map-card{overflow:hidden}
 .gmap{position:relative;overflow:hidden;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none;background:var(--m-land)}
 .gmap.drag{cursor:grabbing}
-.gmap svg{display:block;width:100%;height:100%}
+.gmap>svg{display:block;width:100%;height:100%}
 .gmap .mlab{font-size:12.5px;font-weight:700;fill:var(--m-lab);paint-order:stroke;stroke:var(--m-halo);stroke-width:4px;stroke-linejoin:round}
 .gmap .mt{font-size:17px;font-weight:800;letter-spacing:.14em;fill:var(--m-lab);opacity:.5}
 .gmap .mt.s{font-size:12.5px}
@@ -421,6 +421,31 @@ body::before{background:var(--nav)}
 .gm-leg{position:absolute;left:12px;bottom:12px;background:var(--surface);border-radius:12px;padding:8px 12px;display:flex;gap:4px 14px;flex-wrap:wrap;font-size:12px;font-weight:600;box-shadow:0 6px 18px -6px rgba(0,0,0,.3);max-width:calc(100% - 24px);pointer-events:none}
 .gm-leg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
 .gm-hint{display:none;position:absolute;right:12px;bottom:12px;background:rgba(11,22,40,.75);color:#fff;font-size:11px;font-weight:600;padding:4px 9px;border-radius:99px;pointer-events:none}
+.gmap.real{cursor:auto;touch-action:auto}
+.lmap{position:absolute;inset:0;background:var(--m-land);font-family:var(--f-body)}
+.gmap .gm-badge,.gmap .gm-leg{z-index:1001}
+.gmap .leaflet-bar{border:0;box-shadow:0 6px 18px -6px rgba(0,0,0,.35);border-radius:12px;overflow:hidden}
+.gmap .leaflet-bar a{width:38px;height:38px;line-height:38px;font-size:20px;background:var(--surface);color:var(--fg);border-color:var(--line)}
+.gmap .leaflet-control-attribution{font-size:10px;background:rgba(255,255,255,.75)}
+.lci{background:none;border:0}
+.lc{position:relative}
+.lc-dot{position:absolute;left:-15px;top:-15px;width:30px;height:30px;border-radius:50%;background:var(--c);border:3px solid #fff;display:grid;place-items:center;color:#fff;box-shadow:0 3px 8px rgba(11,26,46,.35)}
+.lc-dot svg{width:15px;height:15px}
+.lc-card{position:absolute;left:0;transform:translateX(-50%);background:var(--m-card);border-radius:9px;padding:4px 9px 5px 10px;box-shadow:0 4px 12px rgba(11,26,46,.28);white-space:nowrap;border-left:4px solid var(--c)}
+.lc.up .lc-card{bottom:22px}.lc.dn .lc-card{top:22px}
+.lc-card b{display:block;font-family:var(--f-mono);font-size:11.5px;color:var(--fg)}
+.lc-card small{display:block;font-size:10.5px;color:var(--muted);font-weight:600}
+.lc-seats{display:flex;gap:2px;margin-top:3px}.lc-seats i{width:7px;height:8px;border-radius:2px}.lc-seats.many i{width:5px}
+.lc.fl .lc-card{background:var(--mark)}
+.lpin{position:absolute;left:-14px;top:-34px;width:28px;height:28px;border-radius:50% 50% 50% 0;background:var(--c);transform:rotate(-45deg);border:3px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,.35);animation:dropin .5s both}
+.lpin::after{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px;border-radius:50%;background:#fff}
+.lflag{position:absolute;left:-1px;top:-34px;width:2.5px;height:34px;background:var(--fg)}
+.lflag::after{content:"";position:absolute;left:2px;top:0;width:20px;height:14px;background:var(--fg);clip-path:polygon(0 0,100% 0,75% 50%,100% 100%,0 100%)}
+.lshield{position:absolute;transform:translate(-50%,12px);background:#fff;border:2px solid #c2410c;color:#c2410c;font-weight:800;font-size:11.5px;padding:1px 6px;border-radius:5px}
+.leaflet-tooltip.ltip{background:var(--surface);color:var(--fg);border:0;border-radius:8px;font-weight:700;font-size:11.5px;padding:2px 7px;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.leaflet-tooltip.ltip::before{display:none}
+.lmap.far .ltip.minor{display:none}
+.lmap.vfar .lc-card{display:none}
 @media (max-width:700px){
   .gm-hint{display:block;top:58px;right:auto;left:12px;bottom:auto}
   .gm-leg{font-size:11px;padding:6px 10px;gap:2px 10px}
@@ -641,20 +666,22 @@ function mapOpts(k){if(k==='disp')return {sel:S.sel};if(k==='owner')return {};
 function mapFocus(k){if(k==='disp'){const o=order(S.sel);return [o?rp(PT(o.pickup))[0]:MW/2,285]}if(k==='cust')return rp(PT(S.cust.pickup));return [MW/2,285]}
 const MV={};let mapDragged=false;
 function mapBox(k,h){const o=mapOpts(k);const live=S.cars.filter(c=>c.status==='Đang chạy').length;
-  return `<div class="gmap" data-map="${k}" style="height:${h}">
-   <svg ${o.pick?'data-a="pickMap"':''} role="img" aria-label="Bản đồ minh họa tuyến Quốc lộ 26 từ Buôn Ma Thuột đến Ea Kar" preserveAspectRatio="xMidYMid slice" viewBox="0 0 ${MW} ${MH}">${mapBg()}<g class="dyn">${mapDyn(o)}</g></svg>
+  const real=useReal();
+  return `<div class="gmap${real?' real':''}" data-map="${k}" style="height:${h}">
+   ${real?'<div class="lmap"></div>':`<svg ${o.pick?'data-a="pickMap"':''} role="img" aria-label="Bản đồ minh họa tuyến Quốc lộ 26 từ Buôn Ma Thuột đến Ea Kar" preserveAspectRatio="xMidYMid slice" viewBox="0 0 ${MW} ${MH}">${mapBg()}<g class="dyn">${mapDyn(o)}</g></svg>`}
    ${k!=='cust'?`<div class="gm-badge"><span class="live" style="color:inherit">Trực tiếp</span><b>${live}</b> xe đang chạy</div>`:o.pick?`<div class="gm-badge">${ICON.pin} Chạm bản đồ để ghim điểm đón</div>`:''}
-   <div class="gm-ctl"><button data-a="mapZoom" data-v="${k}:1" aria-label="Phóng to">+</button><button data-a="mapZoom" data-v="${k}:-1" aria-label="Thu nhỏ">−</button><button data-a="mapZoom" data-v="${k}:0" aria-label="Về giữa" style="font-size:15px">⌖</button></div>
+   ${real?'':`<div class="gm-ctl"><button data-a="mapZoom" data-v="${k}:1" aria-label="Phóng to">+</button><button data-a="mapZoom" data-v="${k}:-1" aria-label="Thu nhỏ">−</button><button data-a="mapZoom" data-v="${k}:0" aria-label="Về giữa" style="font-size:15px">⌖</button></div>`}
    ${k!=='cust'?`<div class="gm-leg"><span><i style="background:var(--accent)"></i>Còn ghế</span><span><i style="background:#64748b"></i>Hết ghế</span><span><i style="background:var(--info)"></i>Chờ ở bến</span><span><i style="background:var(--bad)"></i>Điểm đón</span></div>`:''}
-   <div class="gm-hint">Kéo để xem</div>
+   ${real?'':'<div class="gm-hint">Kéo để xem</div>'}
   </div>`}
 function applyView(el){const k=el.dataset.map;const svg=el.querySelector('svg');if(!svg)return;const cw=el.clientWidth,ch=el.clientHeight;if(!cw||!ch)return;
   const v=MV[k]||(MV[k]={z:1});const base=Math.max(cw/MW,ch/MH,cw<700?.9:0);const s=base*v.z;const vw=cw/s,vh=ch/s;
   const f=mapFocus(k);const fk=f.join();if(v.fk!==fk){v.fk=fk;v.cx=null;v.cy=null}
   let cx=v.cx??f[0],cy=v.cy??f[1];const cl=(c,vs,W)=>vs>=W?W/2:Math.min(W-vs/2,Math.max(vs/2,c));cx=cl(cx,vw,MW);cy=cl(cy,vh,MH);
   v.cur={cx,cy,vw,vh,s};svg.setAttribute('viewBox',`${(cx-vw/2).toFixed(1)} ${(cy-vh/2).toFixed(1)} ${vw.toFixed(1)} ${vh.toFixed(1)}`)}
-function initMaps(){document.querySelectorAll('.gmap').forEach(applyView)}
-function refreshMaps(){document.querySelectorAll('.gmap').forEach(el=>{const g=el.querySelector('g.dyn');if(g)g.innerHTML=mapDyn(mapOpts(el.dataset.map))});
+function initMaps(){Object.keys(LM).forEach(k=>{if(!document.body.contains(LM[k].box)){try{LM[k].map.remove()}catch(e){}delete LM[k]}});
+ document.querySelectorAll('.gmap').forEach(el=>{if(el.classList.contains('real')){try{realInit(el)}catch(e){console.error(e);RFAIL=true;render()}}else applyView(el)})}
+function refreshMaps(){document.querySelectorAll('.gmap').forEach(el=>{if(el.classList.contains('real')){const M=LM[el.dataset.map];if(M&&M.box.isConnected)realDyn(M);return}const g=el.querySelector('g.dyn');if(g)g.innerHTML=mapDyn(mapOpts(el.dataset.map))});
  document.querySelectorAll('[data-carpos]').forEach(el=>{const c=car(el.dataset.carpos);if(c)el.style.left=(c.pos*100)+'%'})}
 let mdrag=null;
 document.addEventListener('pointerdown',e=>{const el=e.target.closest('.gmap');if(!el||e.target.closest('.gm-ctl'))return;const v=MV[el.dataset.map];if(!v||!v.cur)return;
@@ -664,6 +691,81 @@ document.addEventListener('pointermove',e=>{if(!mdrag)return;const dx=e.clientX-
 document.addEventListener('pointerup',()=>{if(mdrag){if(mdrag.moved){mapDragged=true;setTimeout(()=>mapDragged=false,50)}mdrag.el.classList.remove('drag');mdrag=null}});
 document.addEventListener('pointercancel',()=>{if(mdrag){mdrag.el.classList.remove('drag');mdrag=null}});
 window.addEventListener('resize',initMaps);
+document.addEventListener('wheel',e=>{const el=e.target.closest('.gmap:not(.real)');if(!el)return;const m=MV[el.dataset.map];if(!m||!m.cur)return;e.preventDefault();
+  m.z=Math.min(3.2,Math.max(1,m.z*(e.deltaY<0?1.15:1/1.15)));applyView(el)},{passive:false});
+/* ================== BẢN ĐỒ THẬT (Leaflet + nền CARTO/OSM + đường QL26 lấy từ OSRM) ================== */
+// Tọa độ điểm dừng là ước lượng; khi chạy thật sẽ dùng tọa độ nhà xe cung cấp.
+const GEO={'Ngã Sáu BMT':[12.6669,108.0381],'BV Đa khoa tỉnh Đắk Lắk':[12.6752,108.0433],'ĐH Tây Nguyên':[12.6545,108.0533],'Sân bay Buôn Ma Thuột':[12.6683,108.1203],
+ 'Hòa Đông':[12.690,108.200],'Chợ Phước An':[12.7094,108.3037],'Ea Kly':[12.7425,108.3700],'Ea Đar':[12.790,108.410],'Chợ Ea Kar':[12.8046,108.4567],'Bến xe Ea Kar':[12.806,108.462],'Ea Knốp':[12.780,108.560]};
+const MINOR={'BV Đa khoa tỉnh Đắk Lắk':1,'ĐH Tây Nguyên':1,'Sân bay Buôn Ma Thuột':1,'Bến xe Ea Kar':1};
+let RROUTE=null,RREAL=false,RFAIL=false,RLOADING=false;
+const useReal=()=>typeof L!=='undefined'&&!RFAIL;
+function hav(a,b){const R=6371,r=Math.PI/180,dl=(b[0]-a[0])*r,dn=(b[1]-a[1])*r;const x=Math.sin(dl/2)**2+Math.cos(a[0]*r)*Math.cos(b[0]*r)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(x))}
+function setRoute(pts,real){const cum=[0];for(let i=1;i<pts.length;i++)cum.push(cum[i-1]+hav(pts[i-1],pts[i]));const tot=cum[cum.length-1];
+  const proj=p=>{let best=0,bd=1e9;for(let i=0;i<pts.length;i++){const d=hav(p,pts[i]);if(d<bd){bd=d;best=i}}return cum[best]/tot};
+  const f=PLACES.map(pl=>proj(GEO[pl.n]));for(let i=1;i<f.length;i++)if(f[i]<=f[i-1])f[i]=Math.min(1,f[i-1]+.004);
+  RROUTE={pts,cum,tot,f};RREAL=real}
+function rAt(fr){const R=RROUTE;const d=Math.max(0,Math.min(1,fr))*R.tot;let lo=0,hi=R.cum.length-1;while(hi-lo>1){const m=(lo+hi)>>1;if(R.cum[m]<d)lo=m;else hi=m}
+  const k=(d-R.cum[lo])/((R.cum[hi]-R.cum[lo])||1);return [R.pts[lo][0]+(R.pts[hi][0]-R.pts[lo][0])*k,R.pts[lo][1]+(R.pts[hi][1]-R.pts[lo][1])*k]}
+function t2f(t){const T=PLACES.map(p=>p.t),F=RROUTE.f;if(t<=T[0])return F[0]*t/T[0];if(t>=T[T.length-1])return F[F.length-1]+(1-F[F.length-1])*(t-T[T.length-1])/(1-T[T.length-1]);
+  for(let i=1;i<T.length;i++)if(t<=T[i]){const k=(t-T[i-1])/(T[i]-T[i-1]);return F[i-1]+(F[i]-F[i-1])*k}return 1}
+const rll=t=>rAt(t2f(t));
+function rSeg(a,b){const fa=t2f(Math.min(a,b)),fb=t2f(Math.max(a,b));const out=[rAt(fa)];RROUTE.pts.forEach((p,i)=>{const fr=RROUTE.cum[i]/RROUTE.tot;if(fr>fa&&fr<fb)out.push(p)});out.push(rAt(fb));return out}
+function loadRoute(){if(RLOADING)return;RLOADING=true;
+  try{const c=JSON.parse(localStorage.getItem('ghepxe-route-v1')||'null');if(c&&c.length>20){setRoute(c,true);return}}catch(e){}
+  setRoute(PLACES.map(p=>GEO[p.n]),false);
+  const a=GEO['Ngã Sáu BMT'],b=GEO['Ea Knốp'];
+  fetch(`https://router.project-osrm.org/route/v1/driving/${a[1]},${a[0]};${b[1]},${b[0]}?overview=full&geometries=geojson`).then(r=>r.json()).then(j=>{
+    const pts=j.routes[0].geometry.coordinates.map(([x,y])=>[y,x]);if(pts.length<20)throw 0;
+    try{localStorage.setItem('ghepxe-route-v1',JSON.stringify(pts.map(p=>[+p[0].toFixed(5),+p[1].toFixed(5)])))}catch(e){}
+    setRoute(pts,true);Object.values(LM).forEach(m=>m.drawStatic&&m.drawStatic());refreshMaps()}).catch(()=>{})}
+const LM={};
+function carIcon(c,compact){const f=free(c);const col=c.status!=='Đang chạy'?'var(--info)':f===0?'#64748b':'var(--accent)';const up=c.dir==='EK-BMT';const fl=S.flash===c.id;
+  const n=Math.min(c.seats,15);let seats='';for(let k=0;k<n;k++)seats+=`<i style="${k<used(c)?'background:'+col:'box-shadow:inset 0 0 0 1.2px '+col}"></i>`;
+  const html=`<div class="lc ${up?'up':'dn'} ${fl?'fl':''}" style="--c:${col}"><div class="lc-card"><b>${up?'◀':'▶'} ${c.plate.slice(4)}</b>${compact?`<small>${esc(drv(c.driver).name)}</small>`:`<span class="lc-seats ${n>8?'many':''}">${seats}</span>`}</div><div class="lc-dot">${ICON.car}</div></div>`;
+  return L.divIcon({className:'lci',html,iconSize:[0,0]})}
+const pinIcon=(col)=>L.divIcon({className:'lci',html:`<div class="lpin" style="--c:${col}"></div>`,iconSize:[0,0]});
+const flagIcon=()=>L.divIcon({className:'lci',html:'<div class="lflag"></div>',iconSize:[0,0]});
+function curve(a,b,lift){const m=[(a[0]+b[0])/2+lift,(a[1]+b[1])/2];const out=[];for(let i=0;i<=24;i++){const t=i/24,u=1-t;out.push([u*u*a[0]+2*u*t*m[0]+t*t*b[0],u*u*a[1]+2*u*t*m[1]+t*t*b[1]])}return out}
+function realInit(el){const k=el.dataset.map;const box=el.querySelector('.lmap');if(!box)return;loadRoute();
+  if(LM[k]&&LM[k].box===box){LM[k].map.invalidateSize();return}
+  if(LM[k]){try{LM[k].map.remove()}catch(e){}}
+  const dark=matchMedia('(prefers-color-scheme: dark)').matches;
+  const map=L.map(box,{zoomControl:false,attributionControl:true,tap:true,scrollWheelZoom:true,touchZoom:true,dragging:!L.Browser.mobile||k!=='cust'?true:true});
+  map.attributionControl.setPrefix('Leaflet');L.control.zoom({position:'topright',zoomInTitle:'Phóng to',zoomOutTitle:'Thu nhỏ'}).addTo(map);
+  let errs=0;const tl=L.tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/${dark?'dark_all':'voyager'}/{z}/{x}/{y}{r}.png`,{subdomains:'abcd',maxZoom:19,attribution:'© OpenStreetMap · © CARTO'}).addTo(map);
+  tl.on('tileerror',()=>{if(++errs===6&&!M.osm){M.osm=true;map.removeLayer(tl);L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map)}});
+  map.createPane('top').style.zIndex=660;const M={map,box,key:k,stat:L.layerGroup().addTo(map),dyn:L.layerGroup().addTo(map)};LM[k]=M;
+  M.drawStatic=()=>{M.stat.clearLayers();const line=RROUTE.pts;
+    L.polyline(line,{color:dark?'#7a4f05':'#cf8a0a',weight:11,opacity:.9,interactive:false}).addTo(M.stat);
+    L.polyline(line,{color:'#fbbf24',weight:7,opacity:1,interactive:false}).addTo(M.stat);
+    PLACES.forEach(p=>{const ll=rAt(RROUTE.f[PLACES.indexOf(p)]);L.circleMarker(ll,{radius:6,color:'#0f1b2d',weight:3,fillColor:'#fff',fillOpacity:1}).addTo(M.stat)
+      .bindTooltip(esc(short(p.n)),{permanent:true,direction:PLACES.indexOf(p)%2?'bottom':'top',offset:[0,PLACES.indexOf(p)%2?6:-6],className:'ltip'+(MINOR[p.n]?' minor':'')})});
+    L.marker(rAt(.5),{icon:L.divIcon({className:'lci',html:'<div class="lshield">QL26</div>',iconSize:[0,0]}),interactive:false}).addTo(M.stat)};
+  M.drawStatic();
+  const v=MV[k];const focus=()=>{if(k==='disp'){const o=order(S.sel);return o?rll(PT(o.pickup)):null}if(k==='cust')return rll(PT(S.cust.pickup));return null};
+  if(v&&v.center&&v.fk===String(focus()))map.setView(v.center,v.zoom,{animate:false});
+  else if(k==='cust')map.setView(focus(),13,{animate:false});
+  else if(box.clientWidth<700)map.setView(focus()||rAt(.5),12,{animate:false});else map.fitBounds(L.latLngBounds(RROUTE.pts),{padding:[30,30],animate:false});
+  MV[k]={fk:String(focus())};map.on('moveend zoomend',()=>{MV[k].center=map.getCenter();MV[k].zoom=map.getZoom()});
+  const zc=()=>{box.classList.toggle('far',map.getZoom()<12);box.classList.toggle('vfar',map.getZoom()<11)};map.on('zoomend',zc);zc();
+  if(mapOpts(k).pick)map.on('click',e=>{const p=[e.latlng.lat,e.latlng.lng];const near=PLACES.reduce((b,x)=>hav(p,rAt(RROUTE.f[PLACES.indexOf(x)]))<hav(p,rAt(RROUTE.f[PLACES.indexOf(b)]))?x:b);pickPlace(near)});
+  realDyn(M);
+}
+function realDyn(M){if(!M||!RROUTE)return;const o=mapOpts(M.key);M.dyn.clearLayers();const {sel,pickPin,custCar,noCars,compact}=o;
+  if(sel){const od=order(sel);if(od){const a=PT(od.pickup),b=PT(od.drop);
+    L.polyline(rSeg(a,b),{color:'#ef4444',weight:16,opacity:.3,interactive:false}).addTo(M.dyn);
+    if(od.status==='Chờ gán'){const pp=rll(a);suggestFor(od).filter(x=>x.ok).reverse().forEach((x,i,arr)=>{const best=i===arr.length-1;
+      L.polyline(curve(rll(x.c.pos),pp,.03),{color:best?'#059669':'#64748b',weight:best?4:2,dashArray:'8 7',opacity:best?1:.6,className:'flowline',interactive:false}).addTo(M.dyn)})}
+    L.marker(rll(a),{icon:pinIcon('#dc2626'),pane:'top',interactive:false,zIndexOffset:900}).addTo(M.dyn);
+    L.marker(rll(b),{icon:flagIcon(),pane:'top',interactive:false}).addTo(M.dyn)}}
+  if(pickPin)L.marker(rll(PT(pickPin)),{icon:pinIcon('#ea580c'),pane:'top',interactive:false,zIndexOffset:900}).addTo(M.dyn);
+  const cars=noCars?[]:custCar?[custCar]:S.cars.filter(c=>c.status!=='Nghỉ');
+  cars.forEach(c=>L.marker(rll(c.pos),{icon:carIcon(c,compact),pane:'top',interactive:false,zIndexOffset:c.dir==='EK-BMT'?500:400}).addTo(M.dyn));
+}
+function pickPlace(near){S.cust.pickup=near.n;
+  if(S.cust.dir==='EK-BMT'&&PT(S.cust.drop)>=near.t)S.cust.drop='BV Đa khoa tỉnh Đắk Lắk';if(S.cust.dir==='BMT-EK'&&PT(S.cust.drop)<=near.t)S.cust.drop='Chợ Ea Kar';
+  render();toast('Đã ghim điểm đón: '+near.n)}
 /* ================== ĐIỀU HƯỚNG VAI TRÒ ================== */
 const ROLES=[['tong-dai','Tổng đài'],['chu-hang','Chủ hãng'],['tai-xe','Tài xế'],['khach-hang','Khách hàng'],['quan-tri','Quản trị nền tảng']];
 let role='tong-dai';
@@ -1145,9 +1247,7 @@ document.addEventListener('click',e=>{
   if(a==='mapZoom'){const[k,d]=v.split(':');const box=document.querySelector('.gmap[data-map="'+k+'"]');const m=MV[k];if(!box||!m)return;
     if(+d===0){m.z=1;m.cx=m.cy=null}else{m.z=Math.min(3.2,Math.max(1,m.z*(+d>0?1.45:1/1.45)))}applyView(box);return}
   if(a==='pickMap'){if(mapDragged)return;const svg=el;const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const w=pt.matrixTransform(svg.getScreenCTM().inverse());const t=Math.min(1,Math.max(0,(w.x-70)/860));
-    const near=PLACES.reduce((b,p)=>Math.abs(p.t-t)<Math.abs(b.t-t)?p:b);S.cust.pickup=near.n;
-    if(S.cust.dir==='EK-BMT'&&PT(S.cust.drop)>=near.t)S.cust.drop='BV Đa khoa tỉnh Đắk Lắk';if(S.cust.dir==='BMT-EK'&&PT(S.cust.drop)<=near.t)S.cust.drop='Chợ Ea Kar';
-    render();toast('Đã ghim điểm đón: '+near.n);return}
+    const near=PLACES.reduce((b,p)=>Math.abs(p.t-t)<Math.abs(b.t-t)?p:b);pickPlace(near);return}
   if(el.tagName==='INPUT'&&el.type==='checkbox'){} else if(el.closest('a[href^="http"]')) return;
   const A={
    closeModal(){modal('')},
