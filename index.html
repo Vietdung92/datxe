@@ -1,8 +1,9 @@
 <!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b1628"><link rel="stylesheet" href="leaflet.css"><script src="leaflet.js"></script><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png">
+<meta http-equiv="Cache-Control" content="no-cache"><meta name="theme-color" content="#0b1628"><link rel="stylesheet" href="leaflet.css"><script src="leaflet.js"></script><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="GhépXe">
 <meta name="description" content="Bản demo phần mềm quản lý nhà xe ghép: tổng đài, chủ hãng, tài xế, khách hàng.">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px;font-family:system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<script>window.GX_VER='1794623021';window.GX_LABEL='09:23 14/11'</script>
 </head><body>
 <title>GhépXe Demo</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -1326,5 +1327,11 @@ setInterval(()=>{
 
 window.addEventListener('hashchange',route);
 route();fbCount();
+/* Tự tải bản mới khi web vừa được cập nhật (chỉ bản web, có version.txt) */
+if(window.GX_VER){const lb=document.querySelector('.logo small');if(lb)lb.textContent+=' · bản '+GX_LABEL;
+  const chk=()=>fetch('version.txt?'+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.text():'').then(v=>{v=v.trim();
+    if(!v||v===GX_VER)return;let done='';try{done=sessionStorage.getItem('gx-r')||''}catch(e){}if(done===v)return;try{sessionStorage.setItem('gx-r',v)}catch(e){}
+    location.replace(location.pathname+'?v='+v+location.hash)}).catch(()=>{});
+  chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,120000)}
 </script>
 </body></html>
