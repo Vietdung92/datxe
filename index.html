@@ -11,25 +11,37 @@
 <style>
 /* Layout: thanh vai trò cố định trên cùng; tổng đài/chủ hãng/quản trị là màn hình máy tính nhiều cột; tài xế/khách nằm trong khung điện thoại. */
 :root{
-  --bg:#eef2ee; --surface:#ffffff; --surface2:#e5ebe6; --fg:#16201a; --muted:#5a6a60; --line:#d3ddd5;
-  --accent:#0e7a52; --accent-soft:#d6efe3; --on-accent:#ffffff;
-  --road:#3b4741; --mark:#e9a92a;
-  --ok:#1f8a4c; --ok-soft:#dcf2e4; --warn:#a96a05; --warn-soft:#fbefd4; --bad:#c2352b; --bad-soft:#f9dfdc; --info:#2160a8; --info-soft:#dde8f6;
-  --brand:#c2410c; --brand-soft:#fde5d6; --on-brand:#ffffff;
-  --shadow:0 1px 2px rgba(20,40,30,.06),0 6px 18px rgba(20,40,30,.06);
+  --bg:#f1f4f9; --surface:#ffffff; --surface2:#eef2f7; --fg:#0f1b2d; --muted:#5d6b7e; --line:#e2e8f0;
+  --accent:#059669; --accent-soft:#d1fae5; --on-accent:#ffffff;
+  --grad:linear-gradient(135deg,#10b981 0%,#0d9488 55%,#0e7490 100%);
+  --nav:#0b1628; --road:#334155; --mark:#f59e0b;
+  --ok:#059669; --ok-soft:#d1fae5; --warn:#b45309; --warn-soft:#fef3c7; --bad:#dc2626; --bad-soft:#fee2e2; --info:#2563eb; --info-soft:#dbeafe;
+  --brand:#ea580c; --brand-soft:#ffedd5; --on-brand:#ffffff;
+  --shadow:0 1px 2px rgba(15,27,45,.05),0 10px 30px -10px rgba(15,27,45,.14);
+  --m-land:#eef3e3; --m-farm:#d3e5bd; --m-farm2:#e4ecd1; --m-farm-row:rgba(70,110,40,.16); --m-hill:#e3e8d3; --m-contour:rgba(120,110,70,.2);
+  --m-water:#9fd0f2; --m-wlab:#2b78b8; --m-urban:#f3eee6; --m-block:#dcd3c4; --m-road2:#ffffff; --m-road2-case:#d5d1c4;
+  --m-hwy:#fbbf24; --m-hwy-case:#cf8a0a; --m-hwy-line:#fff8dc; --m-stop:#0f1b2d; --m-card:#ffffff; --m-trip:#ef4444; --m-lab:#1f2a3a; --m-halo:#ffffff;
   --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0e1512; --surface:#16201b; --surface2:#1e2a24; --fg:#e6eee8; --muted:#97a89d; --line:#2a3832;
-  --accent:#35c08a; --accent-soft:#163a2b; --on-accent:#06140e; --road:#7c8a82; --mark:#f0b53d;
-  --ok:#4cc782; --ok-soft:#163525; --warn:#f0b53d; --warn-soft:#3a2d10; --bad:#f07167; --bad-soft:#3d1a17; --info:#76a9ec; --info-soft:#17283f;
-  --brand:#fb8a4a; --brand-soft:#3b2214; --on-brand:#1a0c04; --shadow:0 1px 2px rgba(0,0,0,.3); color-scheme:dark}}
+  --bg:#0a1220; --surface:#111c2e; --surface2:#18253a; --fg:#e6edf7; --muted:#94a3b8; --line:#22324a;
+  --accent:#34d399; --accent-soft:#0f3a2e; --on-accent:#04140e; --nav:#060d18; --road:#94a3b8; --mark:#fbbf24;
+  --ok:#34d399; --ok-soft:#0f3a2e; --warn:#fbbf24; --warn-soft:#3a2d0c; --bad:#f87171; --bad-soft:#3d1717; --info:#60a5fa; --info-soft:#14284a;
+  --brand:#fb923c; --brand-soft:#3b2112; --on-brand:#1a0c04; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -10px rgba(0,0,0,.5);
+  --m-land:#0f1d1a; --m-farm:#16302a; --m-farm2:#132821; --m-farm-row:rgba(120,200,150,.12); --m-hill:#142520; --m-contour:rgba(160,200,170,.1);
+  --m-water:#1e4b6e; --m-wlab:#7cb8e8; --m-urban:#1b2636; --m-block:#2a3a50; --m-road2:#3a4a5e; --m-road2-case:#25334a;
+  --m-hwy:#f2b33d; --m-hwy-case:#7a4f05; --m-hwy-line:#fff3c4; --m-stop:#0f1b2d; --m-card:#16233a; --m-trip:#f87171; --m-lab:#e2e8f0; --m-halo:#0f1d1a;
+  color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0e1512; --surface:#16201b; --surface2:#1e2a24; --fg:#e6eee8; --muted:#97a89d; --line:#2a3832;
-  --accent:#35c08a; --accent-soft:#163a2b; --on-accent:#06140e; --road:#7c8a82; --mark:#f0b53d;
-  --ok:#4cc782; --ok-soft:#163525; --warn:#f0b53d; --warn-soft:#3a2d10; --bad:#f07167; --bad-soft:#3d1a17; --info:#76a9ec; --info-soft:#17283f;
-  --brand:#fb8a4a; --brand-soft:#3b2214; --on-brand:#1a0c04; --shadow:0 1px 2px rgba(0,0,0,.3); color-scheme:dark}
+  --bg:#0a1220; --surface:#111c2e; --surface2:#18253a; --fg:#e6edf7; --muted:#94a3b8; --line:#22324a;
+  --accent:#34d399; --accent-soft:#0f3a2e; --on-accent:#04140e; --nav:#060d18; --road:#94a3b8; --mark:#fbbf24;
+  --ok:#34d399; --ok-soft:#0f3a2e; --warn:#fbbf24; --warn-soft:#3a2d0c; --bad:#f87171; --bad-soft:#3d1717; --info:#60a5fa; --info-soft:#14284a;
+  --brand:#fb923c; --brand-soft:#3b2112; --on-brand:#1a0c04; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -10px rgba(0,0,0,.5);
+  --m-land:#0f1d1a; --m-farm:#16302a; --m-farm2:#132821; --m-farm-row:rgba(120,200,150,.12); --m-hill:#142520; --m-contour:rgba(160,200,170,.1);
+  --m-water:#1e4b6e; --m-wlab:#7cb8e8; --m-urban:#1b2636; --m-block:#2a3a50; --m-road2:#3a4a5e; --m-road2-case:#25334a;
+  --m-hwy:#f2b33d; --m-hwy-case:#7a4f05; --m-hwy-line:#fff3c4; --m-stop:#0f1b2d; --m-card:#16233a; --m-trip:#f87171; --m-lab:#e2e8f0; --m-halo:#0f1d1a;
+  color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:14px;line-height:1.45}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--surface)}
@@ -341,6 +353,82 @@ table.pm{border-collapse:separate;border-spacing:3px;font-size:12.5px;width:100%
   .fgrid{grid-template-columns:1fr}
   .demo-tag{display:none}
 }
+/* ---- giao diện v4: thanh điều hướng tối, banner, thẻ chỉ số màu, bản đồ lớn ---- */
+body{background:radial-gradient(900px 420px at 0% -5%,rgba(16,185,129,.10),transparent 70%),radial-gradient(800px 380px at 100% 0%,rgba(37,99,235,.07),transparent 70%),var(--bg);background-attachment:fixed}
+body::before{background:var(--nav)}
+.top{background:var(--nav);border-bottom:0;color:#fff;box-shadow:0 6px 20px -8px rgba(5,12,25,.5)}
+.logo small{color:#8fa1b8}
+.logo-mark{width:34px;height:34px;border-radius:10px;background:var(--grad);color:#fff;box-shadow:0 0 0 3px rgba(16,185,129,.18),0 6px 16px -4px rgba(16,185,129,.6)}
+.roles a{color:#b6c3d4}
+.roles a:hover{background:rgba(255,255,255,.08);color:#fff}
+.roles a.on{background:var(--grad);color:#fff;box-shadow:0 6px 16px -6px rgba(16,185,129,.8)}
+.demo-tag{background:rgba(245,158,11,.14);color:#fbbf24;border:1px solid rgba(245,158,11,.35)}
+.card{border-radius:16px;border-color:var(--line)}
+.card-h{padding:14px 16px}
+.card-h h3{font-size:15px;font-weight:700}
+.btn{border-radius:10px}
+.btn.primary{background:var(--grad);border:0;color:#fff;box-shadow:0 8px 18px -8px rgba(5,150,105,.8)}
+.btn.primary:hover{filter:brightness(1.08);background:var(--grad)}
+.inp{border-radius:10px}
+.inp:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);outline:0}
+.kpi{--k:#10b981;position:relative;overflow:hidden;border-radius:16px;box-shadow:var(--shadow);padding:16px 16px 14px}
+.kpi::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--k)}
+.kpi::after{content:"";position:absolute;right:-50px;top:-50px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,var(--k),transparent 68%);opacity:.13;pointer-events:none}
+.kpi:nth-child(2){--k:#f59e0b}.kpi:nth-child(3){--k:#3b82f6}.kpi:nth-child(4){--k:#8b5cf6}.kpi:nth-child(5){--k:#ec4899}
+.kpi .v{font-size:30px;letter-spacing:-.03em}
+.kpi .l{color:var(--muted);font-size:11px;letter-spacing:.08em}
+#main>.sec-title:first-child,.owner>section>.sec-title:first-child{position:relative;overflow:hidden;align-items:center;padding:22px 24px;border-radius:20px;color:#fff;margin-bottom:18px;
+  background:radial-gradient(circle at 88% -20%,rgba(16,185,129,.45),transparent 45%),radial-gradient(circle at 60% 140%,rgba(37,99,235,.35),transparent 45%),linear-gradient(135deg,#0b1628 0%,#13233d 60%,#0f3340 100%);box-shadow:0 18px 40px -18px rgba(11,22,40,.7)}
+#main>.sec-title:first-child::after,.owner>section>.sec-title:first-child::after{content:"";position:absolute;right:0;bottom:0;width:min(520px,70%);height:100%;pointer-events:none;opacity:.5;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 120'%3E%3Cpath d='M0 100 C80 90 120 40 200 52 S330 110 400 70 S480 20 520 30' fill='none' stroke='%23fbbf24' stroke-width='3' stroke-dasharray='10 9' opacity='.75'/%3E%3Ccircle cx='200' cy='52' r='5' fill='%2334d399'/%3E%3Ccircle cx='400' cy='70' r='5' fill='%2334d399'/%3E%3Ccircle cx='520' cy='30' r='7' fill='%23fbbf24'/%3E%3C/svg%3E") right bottom/contain no-repeat}
+#main>.sec-title:first-child>*,.owner>section>.sec-title:first-child>*{position:relative;z-index:1}
+#main>.sec-title:first-child h2,.owner>section>.sec-title:first-child h2{font-size:25px;font-weight:800;letter-spacing:-.02em}
+#main>.sec-title:first-child .muted,.owner>section>.sec-title:first-child .muted{color:rgba(255,255,255,.72)}
+.sec-title:first-child .seg{background:rgba(255,255,255,.1)}
+.sec-title:first-child .seg button{color:#cbd5e1}
+.sec-title:first-child .seg button.on{background:#fff;color:#0f1b2d}
+.sec-title:first-child .btn.primary{box-shadow:0 0 0 4px rgba(16,185,129,.18),0 10px 24px -8px rgba(16,185,129,.9)}
+.side button{border-radius:10px}
+.side button.on{background:var(--grad);color:#fff;box-shadow:0 8px 18px -10px rgba(5,150,105,.9)}
+.side button.on .badge{background:#fff;color:var(--bad)}
+.tabs2 button.on{color:var(--accent);border-bottom-width:3px}
+.order.sel{background:linear-gradient(90deg,var(--accent-soft),transparent)}
+.sg{border-radius:12px;transition:transform .15s,box-shadow .15s}
+.sg:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.sg.best{background:linear-gradient(135deg,var(--accent-soft),var(--surface));box-shadow:0 0 0 1px var(--accent),0 10px 24px -14px rgba(5,150,105,.7)}
+.seat.f{background:var(--grad);border:0}
+.fc.run{background:var(--grad)}
+.phone{border-color:#0b1628;box-shadow:0 30px 60px -20px rgba(11,22,40,.45),0 0 0 2px #26364f}
+.brandbar{background:linear-gradient(135deg,#f97316,#c2410c)}
+.fb-btn{background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 10px 26px -6px rgba(245,158,11,.7)}
+/* bản đồ */
+.map-card{overflow:hidden}
+.gmap{position:relative;overflow:hidden;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none;background:var(--m-land)}
+.gmap.drag{cursor:grabbing}
+.gmap svg{display:block;width:100%;height:100%}
+.gmap .mlab{font-size:12.5px;font-weight:700;fill:var(--m-lab);paint-order:stroke;stroke:var(--m-halo);stroke-width:4px;stroke-linejoin:round}
+.gmap .mt{font-size:17px;font-weight:800;letter-spacing:.14em;fill:var(--m-lab);opacity:.5}
+.gmap .mt.s{font-size:12.5px}
+.gmap .mw{font-size:12px;font-style:italic;font-weight:600;fill:var(--m-wlab)}
+.roadflow{animation:dash 2.4s linear infinite}
+.gm-badge{position:absolute;top:12px;left:12px;background:rgba(11,22,40,.86);color:#fff;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:7px 12px;border-radius:999px;font-size:12px;font-weight:600;display:flex;gap:6px;align-items:center;box-shadow:0 6px 16px -6px rgba(0,0,0,.5);pointer-events:none}
+.gm-badge .live::before{background:#4ade80}
+.gm-badge svg{width:13px;height:13px}
+.gm-ctl{position:absolute;top:12px;right:12px;display:flex;flex-direction:column;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px -6px rgba(0,0,0,.35);background:var(--surface)}
+.gm-ctl button{width:38px;height:38px;border:0;border-bottom:1px solid var(--line);background:var(--surface);font-size:20px;font-weight:700;cursor:pointer;color:var(--fg);line-height:1}
+.gm-ctl button:last-child{border-bottom:0}
+.gm-ctl button:hover{background:var(--surface2)}
+.gm-leg{position:absolute;left:12px;bottom:12px;background:var(--surface);border-radius:12px;padding:8px 12px;display:flex;gap:4px 14px;flex-wrap:wrap;font-size:12px;font-weight:600;box-shadow:0 6px 18px -6px rgba(0,0,0,.3);max-width:calc(100% - 24px);pointer-events:none}
+.gm-leg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.gm-hint{display:none;position:absolute;right:12px;bottom:12px;background:rgba(11,22,40,.75);color:#fff;font-size:11px;font-weight:600;padding:4px 9px;border-radius:99px;pointer-events:none}
+@media (max-width:700px){
+  .gm-hint{display:block;top:58px;right:auto;left:12px;bottom:auto}
+  .gm-leg{font-size:11px;padding:6px 10px;gap:2px 10px}
+  #main>.sec-title:first-child,.owner>section>.sec-title:first-child{padding:18px 16px;border-radius:16px}
+  #main>.sec-title:first-child h2,.owner>section>.sec-title:first-child h2{font-size:21px}
+  .kpi .v{font-size:26px}
+}
+.phone .gm-hint{display:none}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
@@ -465,50 +553,117 @@ const ICON={
 };
 function gmaps(p){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(p+', Đắk Lắk')}
 
-/* ================== BẢN ĐỒ (minh họa QL26) ================== */
-function rp(t){return [30+t*940,150+36*Math.sin(t*6.1+.4)+16*Math.sin(t*13)]}
-function mapSVG(opt={}){
-  const {sel,compact,pickPin,custCar,noCars}=opt;
-  let road='';for(let i=0;i<=100;i++){const[x,y]=rp(i/100);road+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}
-  const vx=compact?Math.round(Math.min(560,Math.max(0,rp(PT(pickPin||'Chợ Ea Kar'))[0]-240))):0;
-  let s=`<svg viewBox="${compact?vx+' 40 440 230':'0 0 1000 300'}" data-vx="${vx}" role="img" aria-label="Bản đồ minh họa tuyến Quốc lộ 26 từ Buôn Ma Thuột đến Ea Kar" ${compact?'data-a="pickMap" style="cursor:crosshair"':''}>`;
-  s+=`<rect x="0" y="0" width="1000" height="300" fill="var(--surface2)"/>`;
-  s+=`<ellipse cx="80" cy="150" rx="120" ry="95" fill="var(--accent-soft)"/><text x="20" y="40" font-size="15" font-weight="700" fill="var(--muted)">TP. Buôn Ma Thuột</text>`;
-  s+=`<ellipse cx="440" cy="150" rx="90" ry="70" fill="var(--accent-soft)" opacity=".6"/><text x="380" y="60" font-size="13" font-weight="600" fill="var(--muted)">Krông Pắc</text>`;
-  s+=`<ellipse cx="900" cy="150" rx="110" ry="85" fill="var(--accent-soft)"/><text x="848" y="44" font-size="15" font-weight="700" fill="var(--muted)">Ea Kar</text>`;
-  s+=`<path d="${road}" fill="none" stroke="var(--road)" stroke-width="12" stroke-linecap="round"/>`;
-  s+=`<path d="${road}" fill="none" stroke="var(--mark)" stroke-width="1.6" stroke-dasharray="8 8"/>`;
-  s+=`<text x="${compact?vx+10:560}" y="${compact?262:290}" font-size="12" fill="var(--muted)" font-weight="600">Quốc lộ 26 · khoảng 60 km · vị trí minh họa</text>`;
-  PLACES.forEach((p,i)=>{const[x,y]=rp(p.t);const up=i%2===0;
-    s+=`<circle cx="${x}" cy="${y}" r="5" fill="var(--surface)" stroke="var(--road)" stroke-width="2"/>`;
-    s+=`<text x="${x}" y="${up?y-20:y+30}" font-size="${compact?15:12}" text-anchor="middle" fill="var(--fg)" font-weight="500">${esc(short(p.n))}</text>`});
+/* ================== BẢN ĐỒ (minh họa QL26, kéo để di chuyển, nút +/− để phóng to) ================== */
+const MW=1000,MH=560;
+function rp(t){return [70+t*860,300+60*Math.sin(t*5.3+.6)+18*Math.sin(t*12.5)-40*t]}
+function rpath(a,b,n=80){let d='';for(let i=0;i<=n;i++){const[x,y]=rp(a+(b-a)*i/n);d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}return d}
+function mrnd(seed){return()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+let MAPBG=null;
+function mapBg(){if(MAPBG)return MAPBG;const R=mrnd(26);let s='';
+  s+=`<defs><pattern id="cf" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><line x1="0" y1="0" x2="0" y2="7" stroke="var(--m-farm-row)" stroke-width="2.4"/></pattern>
+   <filter id="msh" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="2" stdDeviation="2.4" flood-color="#0b1a2e" flood-opacity=".28"/></filter>
+   <radialGradient id="town" r=".5"><stop offset="0" stop-color="var(--m-urban)"/><stop offset=".75" stop-color="var(--m-urban)" stop-opacity=".85"/><stop offset="1" stop-color="var(--m-urban)" stop-opacity="0"/></radialGradient>
+   <clipPath id="ctB"><circle cx="118" cy="322" r="118"/></clipPath><clipPath id="ctP"><circle cx="${rp(.45)[0]}" cy="${rp(.45)[1]}" r="62"/></clipPath><clipPath id="ctE"><circle cx="${rp(.905)[0]}" cy="${rp(.905)[1]}" r="72"/></clipPath></defs>`;
+  s+=`<rect width="${MW}" height="${MH}" fill="var(--m-land)"/>`;
+  // đồi (đường đồng mức)
+  [[820,70,1],[300,520,.8],[600,500,.6],[980,470,.7]].forEach(([cx,cy,k])=>{for(let i=5;i>0;i--)s+=`<ellipse cx="${cx}" cy="${cy}" rx="${i*34*k}" ry="${i*22*k}" fill="${i===1?'var(--m-hill)':'none'}" stroke="var(--m-contour)" stroke-width="1" transform="rotate(${-12+i*3} ${cx} ${cy})"/>`});
+  // rẫy cà phê, ruộng
+  for(let i=0;i<120;i++){const x=R()*MW,y=R()*MH;const w=26+R()*60,h=18+R()*40,a=(R()*60-30).toFixed(0);const coffee=R()<.55;
+    s+=`<rect x="${x.toFixed(0)}" y="${y.toFixed(0)}" width="${w.toFixed(0)}" height="${h.toFixed(0)}" rx="5" fill="${coffee?'var(--m-farm)':'var(--m-farm2)'}" transform="rotate(${a} ${x.toFixed(0)} ${y.toFixed(0)})"/>`;
+    if(coffee)s+=`<rect x="${x.toFixed(0)}" y="${y.toFixed(0)}" width="${w.toFixed(0)}" height="${h.toFixed(0)}" rx="5" fill="url(#cf)" transform="rotate(${a} ${x.toFixed(0)} ${y.toFixed(0)})"/>`}
+  // sông, hồ
+  s+=`<path d="M0 512 C140 488 230 540 360 506 S600 460 720 492 S900 540 1000 498" fill="none" stroke="var(--m-water)" stroke-width="13" stroke-linecap="round"/>`;
+  s+=`<path d="M640 0 C610 70 690 120 650 190 S560 330 610 420 S700 470 720 492" fill="none" stroke="var(--m-water)" stroke-width="6" stroke-linecap="round"/>`;
+  s+=`<path d="M190 430 c40 -26 110 -20 128 6 c16 24 -20 52 -70 50 c-50 -2 -86 -32 -58 -56z" fill="var(--m-water)"/>`;
+  s+=`<text x="252" y="458" class="mw">Hồ Ea Kao</text><text x="430" y="534" class="mw">Sông Krông Ana</text><text x="668" y="140" class="mw" transform="rotate(-62 668 140)">Suối Ea Knốp</text>`;
+  // thị trấn
+  const town=(cx,cy,r,clip,n)=>{let t=`<circle cx="${cx}" cy="${cy}" r="${r*1.15}" fill="url(#town)"/><g clip-path="url(#${clip})">`;
+    for(let i=0;i<n;i++){const bx=cx-r+R()*r*2,by=cy-r+R()*r*2;t+=`<rect x="${bx.toFixed(0)}" y="${by.toFixed(0)}" width="${(6+R()*12).toFixed(0)}" height="${(5+R()*9).toFixed(0)}" rx="1.5" fill="var(--m-block)"/>`}return t+'</g>'};
+  s+=town(118,322,118,'ctB',260);const[px,py]=rp(.45);s+=town(px,py,62,'ctP',70);const[ex,ey]=rp(.905);s+=town(ex,ey,72,'ctE',90);
+  // đường phụ
+  const side=(d,w=5)=>`<path d="${d}" fill="none" stroke="var(--m-road2-case)" stroke-width="${w+2.5}" stroke-linecap="round"/><path d="${d}" fill="none" stroke="var(--m-road2)" stroke-width="${w}" stroke-linecap="round"/>`;
+  s+=side('M150 0 C140 120 100 210 112 330 S70 470 84 560',7);
+  s+=side('M0 250 C60 270 90 300 118 322 S220 380 300 560',5);
+  s+=side(`M${px} ${py} C${px+10} ${py-80} ${px-30} ${py-160} ${px-10} 0`);
+  s+=side(`M${px} ${py} C${px-20} ${py+90} ${px+40} ${py+170} ${px+20} 560`);
+  const[kx,ky]=rp(.57);s+=side(`M${kx} ${ky} C${kx+20} ${ky+80} ${kx-10} ${ky+150} ${kx+30} 560`,4);
+  s+=side(`M${ex} ${ey} C${ex+20} ${ey-70} ${ex-40} ${ey-140} ${ex-10} 0`);
+  s+=side(`M${ex} ${ey} C${ex-30} ${ey+90} ${ex+40} ${ey+180} ${ex+60} 560`,4);
+  const[dx2,dy2]=rp(.74);s+=side(`M${dx2} ${dy2} C${dx2-20} ${dy2-80} ${dx2+30} ${dy2-150} ${dx2} 0`,4);
+  // Quốc lộ 26
+  const road=rpath(0,1,140);
+  s+=`<path d="M0 ${rp(0)[1]+14} L${rp(0)[0]} ${rp(0)[1]}" stroke="var(--m-hwy-case)" stroke-width="17" stroke-linecap="round"/><path d="M0 ${rp(0)[1]+14} L${rp(0)[0]} ${rp(0)[1]}" stroke="var(--m-hwy)" stroke-width="12" stroke-linecap="round"/>`;
+  s+=`<path d="M${rp(1)[0]} ${rp(1)[1]} L1000 ${rp(1)[1]-12}" stroke="var(--m-hwy-case)" stroke-width="17" stroke-linecap="round"/><path d="M${rp(1)[0]} ${rp(1)[1]} L1000 ${rp(1)[1]-12}" stroke="var(--m-hwy)" stroke-width="12" stroke-linecap="round"/>`;
+  s+=`<path d="${road}" fill="none" stroke="var(--m-hwy-case)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>`;
+  s+=`<path d="${road}" fill="none" stroke="var(--m-hwy)" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+  s+=`<path d="${road}" fill="none" stroke="var(--m-hwy-line)" stroke-width="1.4" stroke-dasharray="10 9" class="roadflow"/>`;
+  const shield=(x,y,n)=>`<g transform="translate(${x-15},${y-11})"><rect width="30" height="22" rx="5" fill="#fff" stroke="#c2410c" stroke-width="2"/><text x="15" y="16" text-anchor="middle" font-size="12.5" font-weight="800" fill="#c2410c">${n}</text></g>`;
+  [.37,.66].forEach(t=>{const[x,y]=rp(t);s+=shield(x,y+30,'QL26')});s+=shield(140,70,'QL14');
+  // tên vùng
+  s+=`<text x="40" y="190" class="mt">TP. BUÔN MA THUỘT</text><text x="${px-70}" y="${py+112}" class="mt s">PHƯỚC AN · KRÔNG PẮC</text><text x="${ex-34}" y="${ey-92}" class="mt">EA KAR</text>`;
+  s+=`<text x="${MW-16}" y="${MH-12}" text-anchor="end" class="mlab" style="font-size:11px;opacity:.75">Bản đồ minh họa · QL26 ≈ 60 km</text>`;
+  // điểm dừng
+  const LS={'Chợ Ea Kar':[-6,27,'end'],'Bến xe Ea Kar':[14,30,'start'],'BV Đa khoa tỉnh Đắk Lắk':[-2,27,'end'],'Sân bay Buôn Ma Thuột':[2,27,'start']};
+  PLACES.forEach((p,i)=>{const[x,y]=rp(p.t);const up=i%2===0;const o=LS[p.n]||[0,up?-17:27,'middle'];
+    s+=`<circle cx="${x}" cy="${y}" r="6" fill="#fff" stroke="var(--m-stop)" stroke-width="3"/>`;
+    s+=`<text x="${x+o[0]}" y="${y+o[1]}" text-anchor="${o[2]}" class="mlab">${esc(short(p.n))}</text>`});
+  return MAPBG=s;
+}
+function mapDyn(opt={}){const {sel,pickPin,custCar,noCars,compact}=opt;let s='';
   let pinO=null;
-  if(sel){const o=order(sel);if(o){pinO=o;
-    if(o.status==='Chờ gán'&&!compact){const[px,py]=rp(PT(o.pickup));
+  if(sel){const o=order(sel);if(o){pinO=o;const a=PT(o.pickup),b=PT(o.drop);
+    s+=`<path d="${rpath(Math.min(a,b),Math.max(a,b),50)}" fill="none" stroke="var(--m-trip)" stroke-width="24" stroke-linecap="round" opacity=".35"/>`;
+    if(o.status==='Chờ gán'){const[px,py]=rp(a);
       suggestFor(o).filter(x=>x.ok).reverse().forEach((x,i,arr)=>{const best=i===arr.length-1;const[cx,cy]=rp(x.c.pos);
-        s+=`<path d="M${cx} ${cy} Q ${(cx+px)/2} ${Math.min(cy,py)-80} ${px} ${py-10}" fill="none" stroke="${best?'var(--accent)':'var(--muted)'}" stroke-width="${best?3:1.5}" stroke-dasharray="7 6" class="flowline" opacity="${best?1:.55}"/>`})}}}
-  if(pickPin){const[px,py]=rp(PT(pickPin));s+=`<g class="drop-in"><path d="M${px} ${py-8} l-11 -19 a12 12 0 1 1 22 0z" fill="var(--brand)"/><circle cx="${px}" cy="${py-33}" r="5" fill="#fff"/></g>`}
+        s+=`<path d="M${cx} ${cy} Q ${(cx+px)/2} ${Math.min(cy,py)-110} ${px} ${py-14}" fill="none" stroke="${best?'var(--accent)':'#64748b'}" stroke-width="${best?3.5:1.8}" stroke-dasharray="8 6" class="flowline" opacity="${best?1:.6}"/>`})}}}
+  if(pickPin){const[px,py]=rp(PT(pickPin));s+=`<g class="drop-in" filter="url(#msh)"><path d="M${px} ${py-6} l-13 -22 a15 15 0 1 1 26 0z" fill="var(--brand)"/><circle cx="${px}" cy="${py-34}" r="6" fill="#fff"/></g><circle cx="${px}" cy="${py}" r="16" fill="var(--brand)" opacity=".18" class="pulse"/>`}
   const cars=noCars?[]:custCar?[custCar]:S.cars.filter(c=>c.status!=='Nghỉ');
-  cars.forEach(c=>{const[x,y0]=rp(c.pos);const lane=c.dir==='EK-BMT'?-1:1;const y=y0+lane*(compact?0:22);
-    const f=free(c);const col=f===0?'var(--muted)':'var(--accent)';const arrow=c.dir==='EK-BMT'?'◀':'▶';const w=compact?120:104;
-    if(S.flash===c.id) s+=`<circle class="pulse" cx="${x}" cy="${y0}" r="12" fill="var(--mark)"/>`;
-    s+=`<g transform="translate(${x-w/2},${y+(lane<0?-46:18)})"><rect width="${w}" height="30" rx="7" fill="${S.flash===c.id?'var(--mark)':col}"/>`;
-    s+=`<text x="8" y="13" font-size="10.5" font-weight="700" fill="var(--surface)" font-family="JetBrains Mono,monospace">${arrow} ${c.plate.slice(4)}</text>`;
-    if(compact) s+=`<text x="8" y="25" font-size="10" fill="var(--surface)">${esc(drv(c.driver).name)}</text>`;
-    else{for(let k=0;k<Math.min(c.seats,10);k++){s+=`<rect x="${8+k*9}" y="18" width="6" height="7" rx="1.5" fill="var(--surface)" opacity="${k<used(c)?1:.35}"/>`}}
-    s+=`</g><circle cx="${x}" cy="${y0}" r="7" fill="${col}" stroke="var(--surface)" stroke-width="2.5"/>`;
+  cars.forEach(c=>{const[x,y]=rp(c.pos);const up=c.dir==='EK-BMT';const f=free(c);
+    const col=c.status!=='Đang chạy'?'var(--info)':f===0?'#64748b':'var(--accent)';const fl=S.flash===c.id;
+    if(fl) s+=`<circle class="pulse" cx="${x}" cy="${y}" r="16" fill="var(--mark)"/>`;
+    const w=compact?118:104,h=compact?34:36,lx=x-w/2,ly=up?y-h-40:y+52;
+    s+=`<g filter="url(#msh)"><path d="M${x-4} ${up?ly+h:ly} L${x} ${up?y-12:y+12} L${x+4} ${up?ly+h:ly}z" fill="${fl?'var(--mark)':'var(--m-card)'}"/><rect x="${lx}" y="${ly}" width="${w}" height="${h}" rx="9" fill="${fl?'var(--mark)':'var(--m-card)'}"/></g>`;
+    s+=`<rect x="${lx}" y="${ly}" width="5" height="${h}" rx="2.5" fill="${col}"/>`;
+    s+=`<text x="${lx+12}" y="${ly+15}" font-size="11.5" font-weight="800" fill="var(--fg)" font-family="JetBrains Mono,monospace">${up?'◀':'▶'} ${c.plate.slice(4)}</text>`;
+    if(compact) s+=`<text x="${lx+12}" y="${ly+28}" font-size="10.5" fill="var(--muted)" font-weight="600">${esc(drv(c.driver).name)}</text>`;
+    else{const n=Math.min(c.seats,15),sz=n>8?5:7,gap=n>8?6.2:9.5;for(let k=0;k<n;k++){s+=`<rect x="${lx+12+k*gap}" y="${ly+21}" width="${sz}" height="8" rx="2" fill="${k<used(c)?col:'none'}" stroke="${col}" stroke-width="1.2"/>`}}
+    s+=`<g filter="url(#msh)"><circle cx="${x}" cy="${y}" r="13" fill="${col}" stroke="#fff" stroke-width="3"/></g>`;
+    s+=`<g transform="translate(${x-8} ${y-8}) scale(.67)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><path d="M5 17h14M6 17l1.5-6h9L18 17"/><circle cx="8" cy="18" r="1.6"/><circle cx="16" cy="18" r="1.6"/></g>`;
   });
   if(pinO){const[px,py]=rp(PT(pinO.pickup));const[dx,dy]=rp(PT(pinO.drop));
-    s+=`<g class="drop-in"><path d="M${px} ${py-8} l-9 -16 a10 10 0 1 1 18 0z" fill="var(--bad)"/><circle cx="${px}" cy="${py-30}" r="4" fill="#fff"/></g>`;
-    s+=`<g><line x1="${dx}" y1="${dy}" x2="${dx}" y2="${dy-34}" stroke="var(--fg)" stroke-width="2"/><path d="M${dx} ${dy-34} h16 l-4 6 l4 6 h-16z" fill="var(--fg)"/></g>`}
-  return s+'</svg>';
+    s+=`<g class="drop-in" filter="url(#msh)"><path d="M${px} ${py-6} l-12 -20 a13.5 13.5 0 1 1 24 0z" fill="var(--bad)"/><circle cx="${px}" cy="${py-31}" r="5" fill="#fff"/></g>`;
+    s+=`<g filter="url(#msh)"><line x1="${dx}" y1="${dy}" x2="${dx}" y2="${dy-40}" stroke="var(--fg)" stroke-width="2.5"/><path d="M${dx} ${dy-40} h20 l-5 7 l5 7 h-20z" fill="var(--fg)"/></g>`}
+  return s;
 }
-function refreshMaps(){document.querySelectorAll('[data-map]').forEach(el=>{const k=el.dataset.map;
-  if(k==='disp') el.innerHTML=mapSVG({sel:S.sel});
-  else if(k==='owner') el.innerHTML=mapSVG({});
-  else if(k==='cust') el.innerHTML=custMap();
- });
+function mapOpts(k){if(k==='disp')return {sel:S.sel};if(k==='owner')return {};
+  const C=S.cust;if(C.step==='track'){const o=order(C.orderId);const c=o&&car(o.car);if(c)return {compact:true,pickPin:C.pickup,custCar:{...c,pos:custCarPos??c.pos},track:true}}
+  return {compact:true,pickPin:C.pickup,noCars:true,pick:true}}
+function mapFocus(k){if(k==='disp'){const o=order(S.sel);return [o?rp(PT(o.pickup))[0]:MW/2,285]}if(k==='cust')return rp(PT(S.cust.pickup));return [MW/2,285]}
+const MV={};let mapDragged=false;
+function mapBox(k,h){const o=mapOpts(k);const live=S.cars.filter(c=>c.status==='Đang chạy').length;
+  return `<div class="gmap" data-map="${k}" style="height:${h}">
+   <svg ${o.pick?'data-a="pickMap"':''} role="img" aria-label="Bản đồ minh họa tuyến Quốc lộ 26 từ Buôn Ma Thuột đến Ea Kar" preserveAspectRatio="xMidYMid slice" viewBox="0 0 ${MW} ${MH}">${mapBg()}<g class="dyn">${mapDyn(o)}</g></svg>
+   ${k!=='cust'?`<div class="gm-badge"><span class="live" style="color:inherit">Trực tiếp</span><b>${live}</b> xe đang chạy</div>`:o.pick?`<div class="gm-badge">${ICON.pin} Chạm bản đồ để ghim điểm đón</div>`:''}
+   <div class="gm-ctl"><button data-a="mapZoom" data-v="${k}:1" aria-label="Phóng to">+</button><button data-a="mapZoom" data-v="${k}:-1" aria-label="Thu nhỏ">−</button><button data-a="mapZoom" data-v="${k}:0" aria-label="Về giữa" style="font-size:15px">⌖</button></div>
+   ${k!=='cust'?`<div class="gm-leg"><span><i style="background:var(--accent)"></i>Còn ghế</span><span><i style="background:#64748b"></i>Hết ghế</span><span><i style="background:var(--info)"></i>Chờ ở bến</span><span><i style="background:var(--bad)"></i>Điểm đón</span></div>`:''}
+   <div class="gm-hint">Kéo để xem</div>
+  </div>`}
+function applyView(el){const k=el.dataset.map;const svg=el.querySelector('svg');if(!svg)return;const cw=el.clientWidth,ch=el.clientHeight;if(!cw||!ch)return;
+  const v=MV[k]||(MV[k]={z:1});const base=Math.max(cw/MW,ch/MH,cw<700?.9:0);const s=base*v.z;const vw=cw/s,vh=ch/s;
+  const f=mapFocus(k);const fk=f.join();if(v.fk!==fk){v.fk=fk;v.cx=null;v.cy=null}
+  let cx=v.cx??f[0],cy=v.cy??f[1];const cl=(c,vs,W)=>vs>=W?W/2:Math.min(W-vs/2,Math.max(vs/2,c));cx=cl(cx,vw,MW);cy=cl(cy,vh,MH);
+  v.cur={cx,cy,vw,vh,s};svg.setAttribute('viewBox',`${(cx-vw/2).toFixed(1)} ${(cy-vh/2).toFixed(1)} ${vw.toFixed(1)} ${vh.toFixed(1)}`)}
+function initMaps(){document.querySelectorAll('.gmap').forEach(applyView)}
+function refreshMaps(){document.querySelectorAll('.gmap').forEach(el=>{const g=el.querySelector('g.dyn');if(g)g.innerHTML=mapDyn(mapOpts(el.dataset.map))});
  document.querySelectorAll('[data-carpos]').forEach(el=>{const c=car(el.dataset.carpos);if(c)el.style.left=(c.pos*100)+'%'})}
+let mdrag=null;
+document.addEventListener('pointerdown',e=>{const el=e.target.closest('.gmap');if(!el||e.target.closest('.gm-ctl'))return;const v=MV[el.dataset.map];if(!v||!v.cur)return;
+  mdrag={el,v,x:e.clientX,y:e.clientY,cx:v.cur.cx,cy:v.cur.cy,moved:false}});
+document.addEventListener('pointermove',e=>{if(!mdrag)return;const dx=e.clientX-mdrag.x,dy=e.clientY-mdrag.y;if(!mdrag.moved&&Math.hypot(dx,dy)<6)return;
+  mdrag.moved=true;mdrag.el.classList.add('drag');const s=mdrag.v.cur.s;mdrag.v.cx=mdrag.cx-dx/s;mdrag.v.cy=mdrag.cy-dy/s;applyView(mdrag.el)});
+document.addEventListener('pointerup',()=>{if(mdrag){if(mdrag.moved){mapDragged=true;setTimeout(()=>mapDragged=false,50)}mdrag.el.classList.remove('drag');mdrag=null}});
+document.addEventListener('pointercancel',()=>{if(mdrag){mdrag.el.classList.remove('drag');mdrag=null}});
+window.addEventListener('resize',initMaps);
 /* ================== ĐIỀU HƯỚNG VAI TRÒ ================== */
 const ROLES=[['tong-dai','Tổng đài'],['chu-hang','Chủ hãng'],['tai-xe','Tài xế'],['khach-hang','Khách hàng'],['quan-tri','Quản trị nền tảng']];
 let role='tong-dai';
@@ -518,7 +673,7 @@ function render(){
   $('#main').innerHTML=({'tong-dai':vDispatch,'chu-hang':vOwner,'tai-xe':vDriver,'khach-hang':vCustomer,'quan-tri':vAdmin})[role]();
   after();
 }
-function after(){document.querySelectorAll('canvas[data-qr]').forEach(drawQR);
+function after(){initMaps();document.querySelectorAll('canvas[data-qr]').forEach(drawQR);
   let rm=false;try{rm=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
   if(rm)return;
   document.querySelectorAll('[data-count]').forEach(el=>{const end=+el.dataset.count;const f=FMT[el.dataset.fmt||'int'];const t0=performance.now();
@@ -542,6 +697,7 @@ function vDispatch(){
    <div class="kpi"><div class="l">Đội xe</div><div class="fleet">${S.cars.map(c=>`<span class="fc ${c.status==='Đang chạy'?'run':c.status==='Nghỉ'?'off':'wait'}" title="${c.plate} · ${c.status}">${ICON.car}</span>`).join('')}</div>${legend([{l:'Chạy',v:cnt('Đang chạy'),c:'var(--ok)'},{l:'Chờ bến',v:cnt('Chờ khách tại bến'),c:'var(--info)'},{l:'Nghỉ',v:cnt('Nghỉ'),c:'var(--muted)'}])}</div>
    <div class="kpi"><div class="l">Ghế trống trên đường</div><div class="v">${freeRun}</div><div style="margin-top:6px">${seatsGlyph(freeRun,'free big')}</div></div>
   </div>
+  <div class="card map-card" style="margin-bottom:16px"><div class="card-h"><h3>Xe trên tuyến lúc này</h3><span class="small muted">Chọn một đơn chờ, bản đồ hiện điểm đón và đường gợi ý xe</span></div>${mapBox('disp','clamp(380px,44vw,560px)')}</div>
   <div class="disp">
    <div class="stack">
     <div class="card">
@@ -558,10 +714,6 @@ function vDispatch(){
     </div>
    </div>
    <div class="stack">
-    <div class="card">
-     <div class="card-h"><h3>Xe trên tuyến lúc này</h3><div class="map-legend"><span><i class="dot" style="background:var(--accent)"></i>Còn ghế</span><span><i class="dot" style="background:var(--muted)"></i>Hết ghế</span><span><i class="dot" style="background:var(--bad)"></i>Điểm đón</span><span>Ô trắng trên xe là ghế</span></div></div>
-     <div class="map-scroll" data-map="disp">${mapSVG({sel:S.sel})}</div>
-    </div>
     <div class="card">${suggestPanel()}</div>
     <div class="card"><div class="card-h"><h3>Lịch chuyến theo xe và ghế</h3><div class="map-legend"><span><i class="dot" style="background:var(--accent)"></i>Đã có khách</span><span><i class="dot" style="background:var(--info)"></i>Vừa gán</span><span><i class="dot" style="background:var(--line)"></i>Trống</span></div></div>
      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Xe</th><th>Vị trí trên tuyến</th><th>Ghế</th></tr></thead><tbody>
@@ -741,7 +893,7 @@ function oOverview(){
 }
 function oMap(){const run=S.cars.filter(c=>c.status!=='Nghỉ');
   return `<div class="sec-title"><h2>Bản đồ xe đang chạy</h2><span class="muted small">Cập nhật vị trí mỗi vài giây từ app tài xế</span></div>
-  <div class="card" style="margin-bottom:16px"><div class="map-scroll" data-map="owner">${mapSVG({})}</div></div>
+  <div class="card map-card" style="margin-bottom:16px">${mapBox('owner','clamp(400px,48vw,620px)')}</div>
   <div class="card"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Xe</th><th>Tài xế</th><th>Chiều</th><th>Trạng thái</th><th class="r">Ghế dùng</th></tr></thead><tbody>${run.map(c=>`<tr><td><span class="plate">${c.plate}</span></td><td>${esc(drv(c.driver).name)}</td><td>${DIRS[c.dir]}</td><td>${c.status}</td><td class="r num">${used(c)}/${c.seats}</td></tr>`).join('')}</tbody></table></div></div>`}
 function exp(d){const n=daysTo(d);const t=d.split('-').reverse().join('/');return n<0?`<span class="pill bad">Quá hạn · ${t}</span>`:n<=30?`<span class="pill warn">Còn ${n} ngày · ${t}</span>`:`<span class="small">${t}</span>`}
 function oCars(){const warn=S.cars.filter(c=>daysTo(c.dk)<=30||daysTo(c.bh)<=30);
@@ -874,9 +1026,6 @@ function drawQR(cv){const ctx=cv.getContext('2d');const n=25,s=cv.width/n;let h=
 const TIMES=[['06:00',0],['07:30',2],['09:00',3],['10:30',4],['13:00',5],['14:30',3],['16:00',1],['17:30',6]];
 function custOrderObj(){const C=S.cust;return {pickup:C.pickup,drop:C.drop,seats:C.charter?6:C.pick.length,luggage:C.luggage,charter:C.charter,seatsCap:6}}
 let custCarPos=null;
-function custMap(){const C=S.cust;
-  if(C.step==='track'){const o=order(C.orderId);const c=o&&car(o.car);if(c){const ghost={...c,pos:custCarPos??c.pos};return mapSVG({compact:true,pickPin:C.pickup,custCar:ghost}).replace('data-a="pickMap" style="cursor:crosshair"','')}}
-  return mapSVG({compact:true,pickPin:C.pickup,noCars:true})}
 function vCustomer(){const C=S.cust;let inner=`<div class="brandbar"><div class="row between"><div><b style="font-size:16px">${esc(S.tenant.name)}</b><div class="small" style="opacity:.9">Xe ghép ${esc(S.tenant.route)}</div></div><span class="small" style="opacity:.9">Chị Lan</span></div></div>`;
   if(C.step==='book') inner+=custBook(); else if(C.step==='finding') inner+=`<div class="empty" style="padding:60px 20px"><div class="live" style="color:var(--brand);justify-content:center">Đang tìm xe phù hợp...</div><p>Tổng đài đã nhận đơn của chị. Thường mất dưới 1 phút.</p></div>`;
   else if(C.step==='track') inner+=custTrack(); else if(C.step==='rate') inner+=custRate(); else inner+=`<div style="padding:30px 18px;text-align:center" class="stack"><div style="font-size:40px;color:var(--mark)">★</div><h3>Cảm ơn chị đã đánh giá!</h3><p class="muted">${C.stars<=2?'Nhà xe đã nhận phản ánh và sẽ gọi lại cho chị trong hôm nay.':'Hẹn gặp lại chị ở chuyến sau.'}</p><button class="btn brand-btn" data-a="custReset">Đặt chuyến mới</button></div>`;
@@ -890,7 +1039,7 @@ function custBook(){const C=S.cust;const opts=v=>PLACES.map(p=>`<option ${p.n===
    <div class="seg" style="width:100%">${['Hôm nay','Ngày mai'].map(v=>`<button style="flex:1" class="${C.day===v?'on':''}" data-a="cDay" data-v="${v}">${v} ${v==='Hôm nay'?'14/11':'15/11'}</button>`).join('')}</div>
    <div><div class="small muted" style="font-weight:600;margin-bottom:6px">Giờ khởi hành</div><div class="chips">${TIMES.map(([t,f])=>{const gone=C.day==='Hôm nay'&&t<'09:00';return `<button class="chip ${C.time===t?'on':''}" data-a="cTime" data-v="${t}" ${f===0||gone?'disabled':''}>${t}<span class="cbar"><span style="width:${gone?0:f/6*100}%"></span></span><small>${gone?'đã chạy':f?'còn '+f:'hết chỗ'}</small></button>`}).join('')}</div></div>
    <div><div class="row between" style="margin-bottom:6px"><span class="small muted" style="font-weight:600">Chọn ghế trên xe</span><label class="row small" style="font-weight:600;gap:6px"><input id="c-charter" type="checkbox" data-a="cCharter" ${C.charter?'checked':''}> Bao cả xe</label></div>${seatMap()}</div>
-   <div class="card" style="overflow:hidden"><div class="small" style="padding:8px 10px;font-weight:600">${ICON.pin} Chạm vào bản đồ để ghim điểm đón</div><div data-map="cust">${custMap()}</div></div>
+   <div class="card" style="overflow:hidden">${mapBox('cust','260px')}</div>
    <div class="fgrid"><label class="f">Điểm đón<select id="c-pickup" class="inp" data-c="pickup">${opts(C.pickup)}</select></label>
    <label class="f">Điểm trả<select id="c-drop" class="inp" data-c="drop">${opts(C.drop)}</select></label></div>
    <label class="row small" style="font-weight:600"><input id="c-lug" type="checkbox" data-a="cLug" ${C.luggage?'checked':''}> Có hành lý lớn hoặc gửi hàng (+${money(PRICE.luggage)})</label>
@@ -902,7 +1051,7 @@ function custTrack(){const C=S.cust;const o=order(C.orderId);const c=car(o.car);
   return `<div style="padding:14px" class="stack">
    <div class="steps">${steps.map((s,i)=>`<div class="stp ${i<cur?'done':''} ${i===cur?'cur':''}"><i></i><span>${s}</span></div>`).join('')}</div>
    <div class="card card-b row" style="gap:14px;background:var(--brand-soft);border-color:var(--brand);flex-wrap:nowrap"><div class="eta-big"><b class="num" data-live="eta">${o.status==='Đã đón'?'✓':arrived?'0':C.eta}</b><small>phút</small></div><div><b style="color:var(--brand)">${o.status==='Đã đón'?'Đang đi đến '+esc(short(o.drop)):arrived?'Xe đã đến điểm đón':'Xe đang đến đón chị'}</b><div class="small">${esc(o.pickup)} · ${o.time}</div></div></div>
-   <div class="card" style="overflow:hidden"><div data-map="cust">${custMap()}</div></div>
+   <div class="card" style="overflow:hidden">${mapBox('cust','300px')}</div>
    <div class="card card-b row" style="gap:10px;flex-wrap:nowrap">${avatar(d,42)}<div style="flex:1;min-width:0"><b>${esc(d.name)}</b><div class="small muted">${c.model} · <span class="plate">${c.plate}</span> · ${d.rating}★</div></div><button class="btn sm" data-a="toastMsg" data-v="Mô phỏng: gọi tài xế ${esc(d.name)} ${d.phone}">${ICON.phone}</button></div>
    <div class="card card-b stack"><div class="row between"><span>Mã đơn</span><b class="mono">${o.id}</b></div><div class="row between"><span>${seatsGlyph(o.seats,'brand')} ${esc(short(o.pickup))} → ${esc(short(o.drop))}</span><b class="num">${money(priceOf(o))}</b></div><div class="row between"><span>Thanh toán</span><b>${o.pay}</b></div>
     ${o.pay==='Chuyển khoản QR'?`<canvas class="qr" width="180" height="180" data-qr="${o.id}"></canvas><div class="small muted" style="text-align:center">Quét để thanh toán · mã minh họa</div>`:''}</div>
@@ -993,7 +1142,9 @@ let fbMood='';
 /* ================== SỰ KIỆN ================== */
 document.addEventListener('click',e=>{
   const el=e.target.closest('[data-a]');if(!el)return;const a=el.dataset.a,v=el.dataset.v;
-  if(a==='pickMap'){const svg=el;const r=svg.getBoundingClientRect();const x=+svg.dataset.vx+(e.clientX-r.left)/r.width*440;const t=Math.min(1,Math.max(0,(x-30)/940));
+  if(a==='mapZoom'){const[k,d]=v.split(':');const box=document.querySelector('.gmap[data-map="'+k+'"]');const m=MV[k];if(!box||!m)return;
+    if(+d===0){m.z=1;m.cx=m.cy=null}else{m.z=Math.min(3.2,Math.max(1,m.z*(+d>0?1.45:1/1.45)))}applyView(box);return}
+  if(a==='pickMap'){if(mapDragged)return;const svg=el;const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const w=pt.matrixTransform(svg.getScreenCTM().inverse());const t=Math.min(1,Math.max(0,(w.x-70)/860));
     const near=PLACES.reduce((b,p)=>Math.abs(p.t-t)<Math.abs(b.t-t)?p:b);S.cust.pickup=near.n;
     if(S.cust.dir==='EK-BMT'&&PT(S.cust.drop)>=near.t)S.cust.drop='BV Đa khoa tỉnh Đắk Lắk';if(S.cust.dir==='BMT-EK'&&PT(S.cust.drop)<=near.t)S.cust.drop='Chợ Ea Kar';
     render();toast('Đã ghim điểm đón: '+near.n);return}
