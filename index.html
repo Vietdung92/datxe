@@ -3,7 +3,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="GhépXe">
 <meta name="description" content="Bản demo phần mềm quản lý nhà xe ghép: tổng đài, chủ hãng, tài xế, khách hàng.">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px;font-family:system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
-<script>window.GX_VER='1794703846';window.GX_LABEL='07:50 15/11';window.GX_DB='https://datxe-demo-default-rtdb.asia-southeast1.firebasedatabase.app'</script>
+<script>window.GX_VER='1794704228';window.GX_LABEL='07:57 15/11';window.GX_DB='https://datxe-demo-default-rtdb.asia-southeast1.firebasedatabase.app'</script>
 </head><body>
 <title>GhépXe Demo</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -1518,7 +1518,7 @@ document.addEventListener('click',e=>{
      S.orders.push({id,name:'Khách dọc đường',phone:$('#add-phone').value||'—',seats:Math.min(free(c),+$('#add-seats').value||1),dir:c.dir,time:'09:12',pickup:pos,drop:$('#add-drop').value,source:'Dọc đường',status:'Đã đón',car:MYC(),note:'',pay:'Tiền mặt'});
      S.drv.addOpen=false;render();toast('Đã thêm khách dọc đường. Tổng đài và chủ hãng thấy ngay, ghế trống tự cập nhật.')},
    drvQR(){S.drv.qr=true;render()},
-   drvPaid(){S.drv.paid=true;S.debts.d1.paid+=drvToday().due;S.debts.d1.confirmed=false;render();toast('Đã báo chuyển khoản. Chủ hãng sẽ xác nhận trong mục Đối soát công nợ.')},
+   drvPaid(){S.drv.paid=true;const dk=S.debts[MYD()]?MYD():'d1';S.debts[dk].paid+=drvToday().due;S.debts[dk].confirmed=false;render();toast('Đã báo chuyển khoản. Chủ hãng sẽ xác nhận trong mục Đối soát công nợ.')},
    cDir(){S.cust.dir=v;if(v==='EK-BMT'){S.cust.pickup='Chợ Ea Kar';S.cust.drop='BV Đa khoa tỉnh Đắk Lắk'}else{S.cust.pickup='BV Đa khoa tỉnh Đắk Lắk';S.cust.drop='Chợ Ea Kar'}render()},
    cDay(){S.cust.day=v;render()},
    cTime(){S.cust.time=v;const bk=bookedSeats();S.cust.pick=S.cust.pick.filter(x=>!bk.includes(x));if(!S.cust.pick.length)S.cust.pick=[['G1','G3','G4','G2','G6','G5'].find(x=>!bk.includes(x))];render()},
