@@ -1,0 +1,245 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Kịch bản test GhépXe</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Bố cục: thanh chọn kịch bản → sân khấu 4 điện thoại (4 cột / 2x2 trên di động) → thẻ bước + điều khiển */
+:root{
+ --bg:#eef2f6; --surface:#ffffff; --surface2:#f3f6f9; --fg:#0f1b2d; --muted:#5b6b7f; --line:#d8e0ea;
+ --navy:#0f1b2d; --screen:#ffffff;
+ --k:#2563eb; --k-soft:#e3ecfd; --t:#0d9488; --t-soft:#d9f3ef; --x:#d97706; --x-soft:#fcefd9; --c:#7c3aed; --c-soft:#eee5fd;
+ --ok:#059669; --bad:#dc2626; --bad-soft:#fde4e4;
+ --f-body:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',sans-serif; --f-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+ --bg:#0b1320; --surface:#131e2e; --surface2:#1a2738; --fg:#e7eef7; --muted:#93a3b8; --line:#26364b; --screen:#0f1826;
+ --k:#60a5fa; --k-soft:#172b4a; --t:#2dd4bf; --t-soft:#0f3330; --x:#fbbf24; --x-soft:#3a2a0c; --c:#a78bfa; --c-soft:#2a1f47;
+ --ok:#34d399; --bad:#f87171; --bad-soft:#3b1717; color-scheme:dark}}
+:root[data-theme="dark"]{
+ --bg:#0b1320; --surface:#131e2e; --surface2:#1a2738; --fg:#e7eef7; --muted:#93a3b8; --line:#26364b; --screen:#0f1826;
+ --k:#60a5fa; --k-soft:#172b4a; --t:#2dd4bf; --t-soft:#0f3330; --x:#fbbf24; --x-soft:#3a2a0c; --c:#a78bfa; --c-soft:#2a1f47;
+ --ok:#34d399; --bad:#f87171; --bad-soft:#3b1717; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.5}
+.wrap{max-width:1080px;margin:0 auto;padding-block:20px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:18px}
+h1{font-size:clamp(22px,4vw,30px);line-height:1.2;margin:0;font-weight:800;text-wrap:balance}
+.sub{color:var(--muted);margin:4px 0 0;max-width:62ch}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.tabs button{flex:none;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:inherit;font-size:13.5px;font-weight:600;padding:8px 14px;border-radius:999px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+:root[data-theme="dark"] .tabs button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tabs button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}}
+.stage{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.stage{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
+.dev{--c0:var(--muted);--s0:var(--surface2);position:relative;background:var(--navy);border-radius:26px;padding:8px;transition:transform .35s,box-shadow .35s}
+.dev[data-r="K"]{--c0:var(--k);--s0:var(--k-soft)} .dev[data-r="T"]{--c0:var(--t);--s0:var(--t-soft)} .dev[data-r="X"]{--c0:var(--x);--s0:var(--x-soft)} .dev[data-r="C"]{--c0:var(--c);--s0:var(--c-soft)}
+.dev.act{transform:translateY(-4px);box-shadow:0 0 0 3px var(--c0),0 14px 30px rgba(15,27,45,.28)}
+.dev.dim{opacity:.55}
+.scr{background:var(--screen);border-radius:19px;min-height:232px;overflow:hidden;display:flex;flex-direction:column}
+.bar{display:flex;align-items:center;gap:7px;padding:9px 10px 8px;background:var(--s0);border-bottom:1px solid var(--line)}
+.bar .ic{width:24px;height:24px;border-radius:8px;background:var(--c0);color:#fff;display:grid;place-items:center;flex:none}
+.bar .ic svg{width:14px;height:14px}
+.bar b{font-size:12.5px;line-height:1.15;display:block}.bar small{font-size:10.5px;color:var(--muted);display:block;font-family:var(--f-mono)}
+.body{padding:9px 10px;display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.35;flex:1}
+.body .h{font-weight:700;font-size:12.5px}
+.ln{display:flex;justify-content:space-between;gap:6px;color:var(--muted)}.ln b{color:var(--fg);font-weight:600;text-align:right}
+.it{border:1px solid var(--line);border-radius:9px;padding:6px 8px;background:var(--surface)}
+.it.new{border-color:var(--c0);background:var(--s0);animation:pop .6s}
+.btn{display:block;text-align:center;border-radius:9px;padding:7px;font-weight:700;font-size:12px;background:var(--surface2);color:var(--fg);border:1px solid var(--line)}
+.btn.hot{background:var(--c0);color:#fff;border-color:var(--c0);animation:tap 1.4s infinite}
+.pill{display:inline-block;padding:1px 7px;border-radius:999px;font-size:10.5px;font-weight:700;background:var(--s0);color:var(--c0)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}.pill.ok{background:var(--surface2);color:var(--ok)}
+.alert{background:var(--bad);color:#fff;border-radius:9px;padding:7px 8px;font-weight:700}
+.stars{color:#f59e0b;letter-spacing:1px}
+.tag{position:absolute;top:-9px;right:12px;z-index:2;font-size:10.5px;font-weight:800;padding:2px 9px;border-radius:999px;color:#fff;background:var(--c0);letter-spacing:.02em}
+.tag.chk{background:var(--ok)}
+.who{display:flex;align-items:center;justify-content:space-between;margin-top:6px;padding:0 4px;color:#cbd5e1;font-size:11px;font-weight:600}
+.who span:last-child{font-family:var(--f-mono);color:#94a3b8}
+.pkt{position:absolute;width:16px;height:16px;border-radius:50%;z-index:5;pointer-events:none;box-shadow:0 0 0 5px rgba(255,255,255,.35),0 4px 14px rgba(0,0,0,.35);transition:transform .9s cubic-bezier(.5,0,.3,1),opacity .3s}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;align-items:start}
+.num{grid-row:span 3;font-family:var(--f-mono);font-weight:700;font-size:34px;line-height:1;color:var(--muted)}
+.num small{display:block;font-size:12px;font-weight:500}
+.card .act{font-weight:800;font-size:16px}
+.card .act i{font-style:normal;color:var(--c0)}
+.card p{margin:0;min-width:0}
+.card .res{color:var(--muted)}.card .res b{color:var(--ok)}
+.ctl{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ctl button{font:inherit;font-weight:700;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:10px 16px;cursor:pointer;min-height:44px}
+.ctl button.main{background:var(--t);border-color:var(--t);color:#fff;min-width:118px}
+.ctl button:disabled{opacity:.4;cursor:default}
+button:focus-visible{outline:3px solid var(--k);outline-offset:2px}
+.dots{display:flex;gap:6px;flex-wrap:wrap;flex:1;min-width:0}
+.dots button{width:30px;height:30px;padding:0;min-height:0;border-radius:9px;font-family:var(--f-mono);font-size:12px;font-weight:700;color:var(--muted)}
+.dots button.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.dots button.done{color:var(--fg)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.acc{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px 16px;font-size:13.5px}
+.acc h2{font-size:14px;margin:0 0 8px}
+.acc .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:760px){.acc .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.acc .grid div{border-left:3px solid var(--c0);padding-left:9px}
+.acc code{font-family:var(--f-mono);font-size:12.5px;font-weight:700}
+.acc a{color:var(--k)}
+@media (max-width:760px){.ctl{position:sticky;bottom:0;z-index:6;background:var(--bg);padding-block:10px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}.ctl button.main{flex:1}.dots{flex:1 1 100%;order:4;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}.dots button{flex:none}}
+@keyframes pop{0%{transform:scale(.92);opacity:.3}100%{transform:none;opacity:1}}
+@keyframes tap{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}50%{box-shadow:0 0 0 4px var(--s0)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+
+<div class="wrap">
+ <header>
+  <h1>Kịch bản test 4 điện thoại</h1>
+  <p class="sub">4 người cầm 4 điện thoại, cùng làm theo từng bước. Khung đang sáng là máy phải thao tác. Chấm màu bay sang máy nào thì máy đó phải tự hiện thay đổi trong 2–3 giây, không cần tải lại trang.</p>
+ </header>
+ <div class="tabs" id="tabs" role="group" aria-label="Chọn kịch bản"></div>
+ <div class="stage" id="stage"></div>
+ <div class="card" id="card"></div>
+ <div class="ctl">
+  <button id="prev" aria-label="Bước trước">←</button>
+  <button id="play" class="main">▶ Tự chạy</button>
+  <button id="next" aria-label="Bước sau">→</button>
+  <div class="dots" id="dots"></div>
+ </div>
+ <div class="legend"><span><i style="background:var(--k)"></i>Máy 1 · Khách</span><span><i style="background:var(--t)"></i>Máy 2 · Tổng đài</span><span><i style="background:var(--x)"></i>Máy 3 · Tài xế</span><span><i style="background:var(--c)"></i>Máy 4 · Chủ hãng</span><span><i style="background:var(--ok)"></i>Nhãn “Kiểm tra”: chỉ nhìn, không bấm</span></div>
+ <section class="acc">
+  <h2>Đăng nhập tại datxe.hcarevietnam.vn</h2>
+  <div class="grid">
+   <div class="dev-k" style="--c0:var(--k)">Máy 1 · Khách<br><code>khach1 · 4444</code></div>
+   <div style="--c0:var(--t)">Máy 2 · Tổng đài<br><code>tongdai · 1111</code></div>
+   <div style="--c0:var(--x)">Máy 3 · Tài xế<br><code>taixe3 · 3333</code></div>
+   <div style="--c0:var(--c)">Máy 4 · Chủ hãng<br><code>chuhang · 2222</code></div>
+  </div>
+  <p style="margin:10px 0 0;color:var(--muted)">Mở <a href="./">datxe.hcarevietnam.vn</a> trên điện thoại, đăng nhập đúng tài khoản của máy mình. Gặp lỗi hay khó dùng chỗ nào, bấm nút vàng <b>Góp ý</b> ở góc dưới màn hình để ghi lại.</p>
+ </section>
+</div>
+
+<script>
+const IC={
+ K:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>',
+ T:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>',
+ X:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M6 17l1.5-6h9L18 17"/><circle cx="8" cy="18" r="1.6"/><circle cx="16" cy="18" r="1.6"/><path d="M8 11l1-3h6l1 3"/></svg>',
+ C:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>'};
+const DEV={K:['Máy 1 · Khách','khach1'],T:['Máy 2 · Tổng đài','tongdai'],X:['Máy 3 · Tài xế','taixe3'],C:['Máy 4 · Chủ hãng','chuhang']};
+const BAR={K:['Đặt xe ghép','Hùng Thịnh'],T:['Bàn tổng đài','hotline'],X:['Y Bhim Niê','47A-345.67'],C:['Chủ hãng','Hùng Thịnh']};
+const ln=(a,b)=>`<div class="ln"><span>${a}</span><b>${b}</b></div>`;
+const it=(t,cls='')=>`<div class="it ${cls}">${t}</div>`;
+const bt=(t,hot)=>`<span class="btn ${hot?'hot':''}">${t}</span>`;
+const pl=(t,c='')=>`<span class="pill ${c}">${t}</span>`;
+const H=t=>`<div class="h">${t}</div>`;
+
+/* Màn hình ban đầu dùng chung */
+const S0={
+ K:H('Đặt chuyến')+ln('Chiều','Ea Kar → BMT')+ln('Đón','Chợ Ea Kar')+ln('Trả','BV tỉnh')+ln('Giờ · ghế','10:30 · 2')+bt('Đặt chuyến'),
+ T:H('Đơn chờ gán '+pl('4'))+it('Trần Văn Khoa · 10:00')+it('Hồ Thị Hạnh · 09:45')+it('H’Linh Mlô · 10:30'),
+ X:ln('Sẵn sàng',pl('BẬT'))+H('Chuyến')+'<div class="it" style="color:var(--muted)">Chưa có khách mới</div>',
+ C:H('Tổng quan hôm nay')+ln('Doanh thu','đang chạy')+ln('Đánh giá mới','0')+it('Xếp hạng tài xế ★ 4.7')};
+
+/* Mỗi bước: a = máy thao tác, chk = máy chỉ kiểm tra, to = máy nhận thay đổi (chấm bay), s = màn hình đổi */
+const SC={
+ main:{name:'Chính · 1 chuyến trọn vẹn',steps:[
+  {a:'X',d:'Kiểm tra nút <b>Sẵn sàng</b> đang bật. Tab Chuyến hiện xe 47A-345.67.',r:'Tài xế chưa có khách mới.',s:{X:ln('Sẵn sàng',pl('BẬT'))+H('Chuyến · 47A-345.67')+'<div class="it" style="color:var(--muted)">Chưa có khách mới</div>'+bt('Sẵn sàng ✓',true)}},
+  {a:'K',to:['T'],d:'Chọn Ea Kar → BMT, đón Chợ Ea Kar, trả BV Đa khoa tỉnh, 10:30, 2 ghế. Bấm <b>Đặt chuyến</b>.',r:'Máy khách hiện “Đang tìm xe phù hợp”. Giá đúng theo số ghế.',
+   s:{K:H('Đặt chuyến')+ln('Đón','Chợ Ea Kar')+ln('Giờ · ghế','10:30 · 2')+bt('Đặt chuyến',true)+'<div class="it new" style="text-align:center">⏳ Đang tìm xe phù hợp…</div>',
+      T:H('Đơn chờ gán '+pl('5','bad'))+it('<b>khach1</b> · App · 10:30 '+pl('mới'),'new')+it('Trần Văn Khoa · 10:00')+it('Hồ Thị Hạnh · 09:45')}},
+  {chk:['T'],d:'Tổng đài không bấm gì, chỉ chờ 2–3 giây.',r:'Đơn khach1, nguồn App, tự hiện trong “Đơn chờ gán xe”. Số chờ gán tăng thêm 1.',s:{}},
+  {a:'T',to:['K','X'],d:'Bấm vào đơn khach1, kéo xuống “Gợi ý xe phù hợp”, bấm <b>Gán xe</b> ở dòng 47A-345.67.',r:'Đơn rời danh sách chờ. Ghế xe 47A-345.67 trong lịch chuyến sáng màu xanh.',
+   s:{T:H('Gợi ý xe cho khach1')+it('<b>47A-345.67</b> Y Bhim Niê<br>'+pl('Phù hợp nhất')+' chờ bến','new')+bt('Gán xe',true)+it('47B-567.89 · chỉ còn 1 ghế'),
+      K:H('Tổng đài đã xếp xe!')+it('<b>Y Bhim Niê</b><br>47A-345.67 · Fortuner','new')+ln('Xe tới sau','≈ 6 phút')+'<div class="it" style="text-align:center">🗺️ xe chạy trên bản đồ</div>',
+      X:ln('Sẵn sàng',pl('BẬT'))+H('Đón · 1 khách')+it('<b>khach1</b> · 2 ghế<br>Chợ Ea Kar → BV tỉnh','new')+'<div style="display:flex;gap:4px">'+bt('Gọi')+bt('Chỉ đường')+'</div>'+bt('Đã đón')}},
+  {chk:['K'],d:'Khách không bấm gì.',r:'Hiện “Tổng đài đã xếp xe cho bạn”, tên tài xế, biển số, số phút xe tới và xe chạy trên bản đồ.',s:{}},
+  {chk:['X'],d:'Tài xế không bấm gì.',r:'Khách khach1 tự hiện trong danh sách đón, có nút Gọi, Chỉ đường, Đã đón, Vắng.',s:{}},
+  {a:'X',to:['K','T'],d:'Bấm <b>Chỉ đường</b> rồi quay lại app, sau đó bấm <b>Đã đón</b>.',r:'Google Maps mở đúng Chợ Ea Kar. Khách chuyển sang “đang trên xe”.',
+   s:{X:ln('Sẵn sàng',pl('BẬT'))+H('Trên xe · 2 ghế')+it('<b>khach1</b> '+pl('Đã đón','ok')+'<br>trả tại BV tỉnh','new')+bt('Đã trả khách'),
+      K:H('Đã đón ✓')+it('Đang đi đến<br><b>BV Đa khoa tỉnh</b>','new')+ln('Tài xế','Y Bhim Niê')+bt('Mô phỏng: kết thúc chuyến'),
+      T:H('Lịch chuyến · ghế')+it('47A-345.67 '+pl('2 khách trên xe'),'new')+it('47B-234.56 · 5/6 ghế')}},
+  {chk:['K'],d:'Khách không bấm gì.',r:'Thanh tiến trình nhảy sang “Đã đón”, chữ đổi thành “Đang đi đến BV Đa khoa tỉnh”.',s:{}},
+  {a:'X',to:['T','C'],d:'Bấm <b>Đã trả khách</b>, rồi mở tab <b>Thu nhập</b>.',r:'Báo cộng tiền chuyến vào doanh thu hôm nay. Tab Thu nhập tăng đúng số tiền.',
+   s:{X:H('Thu nhập hôm nay')+it('+ tiền chuyến khach1 '+pl('Đã trả','ok'),'new')+ln('Phải nộp nhà xe','tự tính')+bt('Nộp qua QR'),
+      T:H('Lịch chuyến · ghế')+it('47A-345.67 '+pl('trống 6 ghế'),'new')+it('47B-234.56 · 5/6 ghế'),
+      C:H('Tổng quan hôm nay')+ln('Doanh thu','+1 chuyến')+ln('Đánh giá mới','0')+it('Xếp hạng tài xế ★ 4.7')}},
+  {a:'K',to:['C'],d:'Bấm <b>Mô phỏng: kết thúc chuyến</b>, chọn 5 sao, chọn vài ý khen, bấm <b>Gửi đánh giá</b>.',r:'Hiện trang cảm ơn.',
+   s:{K:H('Chuyến đi thế nào?')+'<div class="stars" style="font-size:20px;text-align:center">★★★★★</div>'+it('Đúng giờ · Lái an toàn','new')+bt('Gửi đánh giá',true)}},
+  {a:'C',d:'Mở <b>Đánh giá khách</b>, sau đó <b>Tổng quan</b> và <b>Bản đồ xe</b>.',r:'Đánh giá của khach1 nằm trên cùng. Số liệu tổng quan hợp lý.',
+   s:{K:'<div style="text-align:center;padding-top:30px"><div class="stars" style="font-size:30px">★</div><b>Cảm ơn bạn!</b><br><span style="color:var(--muted)">Hẹn gặp lại</span></div>',
+      C:H('Đánh giá khách')+it('<b>khach1</b> <span class="stars">★★★★★</span><br>Đúng giờ · Lái an toàn','new')+it('Lương Văn Đức <span class="stars">★★★★★</span>')+it('Bùi Thanh Tâm '+pl('1★','bad'))}}]},
+ p1:{name:'P1 · Gọi lại khách nhỡ',steps:[
+  {a:'T',d:'Bấm thanh đỏ <b>“… khách đang chờ gọi lại”</b>.',r:'Mỗi số chỉ 1 dòng, kèm số lần gọi và số phút chờ. Ai chờ lâu nhất nằm trên cùng.',
+   s:{T:'<div class="alert">3 khách chờ gọi lại</div>'+it('<b>Trần Văn Khoa</b> '+pl('Gọi 3 lần','bad')+'<br>chờ 9 phút','new')+it('Số lạ 0369… '+pl('2 lần','bad'))+it('Số lạ 0912… '+pl('1 lần'))}},
+  {a:'T',d:'Bấm <b>Gọi lại</b> ở một số lạ.',r:'App chuyển sang tab Đọc chốt đơn, số điện thoại đã điền sẵn.',
+   s:{T:H('🎙 Đọc chốt đơn')+pl('Đang lên đơn cho 0369 845 120')+'<div style="display:grid;place-items:center;padding:6px"><span style="width:52px;height:52px;border-radius:50%;background:var(--t);display:block"></span></div>'+it('Lời đọc sẽ hiện ở đây…')}},
+  {a:'T',d:'Bấm micro, cho phép micro, đọc: <b>“chị Mai hai người đón chợ Ea Kar 11 giờ đi bệnh viện tỉnh”</b>. Đọc thêm 2–3 câu tự nghĩ.',r:'Tên, số người, giờ, điểm đón, điểm trả tự điền đúng (ô màu xanh). Ghi lại câu nào tách sai.',
+   s:{T:H('Ô màu xanh = tự điền')+it('Tên: <b>Chị Mai</b>','new')+it('2 người · <b>11:00</b>','new')+it('Chợ Ea Kar → <b>BV tỉnh</b>','new')+bt('Xác nhận tạo đơn')}},
+  {a:'T',to:['X'],d:'Bấm <b>Xác nhận tạo đơn</b>, rồi gán cho xe 47A-345.67.',r:'Đơn tạo xong, rời danh sách chờ sau khi gán.',
+   s:{T:H('Gợi ý xe cho Chị Mai')+it('<b>47A-345.67</b> '+pl('Phù hợp nhất'),'new')+bt('Gán xe',true),
+      X:ln('Sẵn sàng',pl('BẬT'))+H('Đón · 1 khách')+it('<b>Chị Mai</b> · 2 ghế<br>Chợ Ea Kar → BV tỉnh','new')+bt('Đã đón')}},
+  {chk:['X'],d:'Tài xế không bấm gì.',r:'Khách “Chị Mai” tự hiện trong danh sách đón.',s:{}},
+  {a:'T',d:'Ở dòng khách quen <b>Trần Văn Khoa</b>, bấm <b>Đặt như lần trước</b>.',r:'Đơn tự điền đúng tuyến quen: Ea Đar → Sân bay BMT.',
+   s:{T:H('Đặt như lần trước')+it('Trần Văn Khoa','new')+it('Ea Đar → <b>Sân bay BMT</b>','new')+it('Giờ gợi ý · sửa nếu khác','new')+bt('Xác nhận tạo đơn')}}]},
+ p2:{name:'P2 · Dán Zalo',steps:[
+  {a:'T',d:'Mở tab <b>Dán Zalo</b>, sửa tin nhắn mẫu theo cách khách hay nhắn, bấm <b>AI tách đơn</b>.',r:'Các ô màu xanh điền đúng.',
+   s:{T:H('Tin Zalo của khách')+it('“Em ơi cho chị đặt 2 người lên Ban Mê 13h30… Chị Hoa 0987…”')+bt('AI tách đơn',true)+it('Chị Hoa · 2 · 13:30','new')}},
+  {a:'T',to:['X'],d:'Tạo đơn rồi gán cho xe 47A-345.67.',r:'Tài xế thấy khách mới.',
+   s:{T:H('Gợi ý xe cho Chị Hoa')+it('<b>47A-345.67</b> '+pl('Phù hợp nhất'),'new')+bt('Gán xe',true),
+      X:ln('Sẵn sàng',pl('BẬT'))+H('Đón · 1 khách')+it('<b>Chị Hoa</b> · 2 ghế<br>Ea Đar → BV tỉnh','new')+bt('Đã đón')}}]},
+ p3:{name:'P3 · Đánh giá xấu',steps:[
+  {a:'K',to:['T'],d:'Bấm <b>Đặt chuyến mới</b>, đặt thêm một chuyến. Máy 2 gán cho xe 47A-345.67.',r:'Khách thấy xe được xếp.',
+   s:{K:H('Tổng đài đã xếp xe!')+it('<b>Y Bhim Niê</b><br>47A-345.67','new')+bt('Mô phỏng: kết thúc chuyến'),
+      T:H('Đơn chờ gán')+it('<b>khach1</b> · App '+pl('mới'),'new')+bt('Gán xe',true)}},
+  {a:'K',to:['C'],d:'Bấm <b>Mô phỏng: kết thúc chuyến</b>, chọn 1 hoặc 2 sao, ghi lý do, gửi.',r:'Khách gửi xong đánh giá.',
+   s:{K:H('Chuyến đi thế nào?')+'<div class="stars" style="font-size:20px;text-align:center">★<span style="opacity:.25">★★★★</span></div>'+it('Tài xế đến trễ','new')+bt('Gửi đánh giá',true)}},
+  {a:'C',d:'Mở <b>Đánh giá khách</b>.',r:'Đánh giá xấu nằm trên cùng, ở trạng thái cần xử lý.',
+   s:{C:H('Đánh giá khách')+'<div class="alert">1 đánh giá cần xử lý</div>'+it('<b>khach1</b> '+pl('1★','bad')+'<br>Tài xế đến trễ','new')+it('khach1 <span class="stars">★★★★★</span>')}}]},
+ p4:{name:'P4 · Nộp tiền',steps:[
+  {a:'X',to:['C'],d:'Tab <b>Thu nhập</b>, bấm <b>Nộp qua QR</b> rồi <b>Tôi đã chuyển khoản</b>.',r:'Tài xế thấy đã báo chuyển khoản.',
+   s:{X:H('Nộp tiền nhà xe')+'<div style="display:grid;place-items:center"><span style="width:62px;height:62px;background:repeating-conic-gradient(var(--fg) 0 25%,var(--screen) 0 50%) 0 0/12px 12px;display:block;border-radius:4px"></span></div>'+bt('Tôi đã chuyển khoản',true),
+      C:H('Đối soát công nợ')+it('<b>Y Bhim Niê</b><br>'+pl('chờ xác nhận chuyển khoản','bad'),'new')+bt('Xác nhận')}},
+  {a:'C',d:'Mở <b>Đối soát công nợ</b>, dòng Y Bhim Niê, bấm <b>Xác nhận</b>.',r:'Dòng đó hết báo chờ.',
+   s:{C:H('Đối soát công nợ')+it('<b>Y Bhim Niê</b><br>'+pl('Đã nhận tiền','ok'),'new')+it('Phạm Văn Lợi '+pl('còn nợ','bad'))}}]},
+ p5:{name:'P5 · Khách dọc đường',steps:[
+  {a:'X',to:['T'],d:'Bấm <b>+1 khách dọc đường</b>, thêm 1 khách.',r:'Tài xế thấy thêm 1 khách trên xe.',
+   s:{X:H('Thêm khách dọc đường')+it('1 khách · đón tại vị trí xe','new')+bt('Thêm lên xe',true),
+      T:H('Lịch chuyến · ghế')+it('47A-345.67 '+pl('+1 ghế có khách'),'new')+it('47B-234.56 · 5/6 ghế')}},
+  {chk:['T'],d:'Tổng đài không bấm gì.',r:'Lịch chuyến của xe 47A-345.67 có thêm 1 ghế có khách. Tổng đài biết xe còn bao nhiêu ghế mà không cần gọi tài xế.',s:{}}]}
+};
+
+const $=s=>document.querySelector(s);
+let sc='main',i=0,timer=null;
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function state(){const st={...S0};SC[sc].steps.slice(0,i+1).forEach(s=>Object.assign(st,s.s));return st}
+function draw(fly){const steps=SC[sc].steps,s=steps[i],st=state();
+ $('#tabs').innerHTML=Object.entries(SC).map(([k,v])=>`<button data-sc="${k}" aria-pressed="${k===sc}">${v.name}</button>`).join('');
+ $('#stage').innerHTML=Object.keys(DEV).map(r=>{const act=s.a===r,chk=(s.chk||[]).includes(r),rec=(s.to||[]).includes(r);
+  const changed=s.s&&s.s[r];
+  return `<div class="dev ${act?'act':''} ${!act&&!chk&&!rec&&!changed?'dim':''}" data-r="${r}" id="d-${r}">
+   ${act?'<span class="tag">Bấm ở đây</span>':chk?'<span class="tag chk">Kiểm tra</span>':''}
+   <div class="scr"><div class="bar"><span class="ic">${IC[r]}</span><span><b>${BAR[r][0]}</b><small>${BAR[r][1]}</small></span></div><div class="body">${st[r]}</div></div>
+   <div class="who"><span>${DEV[r][0]}</span><span>${DEV[r][1]}</span></div></div>`}).join('');
+ const who=s.a||(s.chk||[])[0];
+ $('#card').style.setProperty('--c0',`var(--${who.toLowerCase()})`);
+ $('#card').innerHTML=`<div class="num">${String(i+1).padStart(2,'0')}<small>/ ${steps.length}</small></div>
+  <div class="act"><i>${DEV[who][0]}</i>${s.a?'':' · chỉ kiểm tra'}</div>
+  <p>${s.d}</p><p class="res"><b>Đúng khi:</b> ${s.r}</p>`;
+ $('#dots').innerHTML=steps.map((_,k)=>`<button data-i="${k}" class="${k===i?'on':k<i?'done':''}" aria-label="Bước ${k+1}">${k+1}</button>`).join('');
+ $('#prev').disabled=i===0;$('#next').disabled=i===steps.length-1;
+ if(fly&&s.a&&s.to&&!RM)s.to.forEach((t,n)=>setTimeout(()=>packet(s.a,t),350+n*180));
+}
+function packet(a,b){const st=$('#stage').getBoundingClientRect(),A=$('#d-'+a).getBoundingClientRect(),B=$('#d-'+b).getBoundingClientRect();
+ const p=document.createElement('span');p.className='pkt';p.style.background=`var(--${a.toLowerCase()})`;
+ const x0=A.left-st.left+A.width/2-8,y0=A.top-st.top+A.height/2-8,x1=B.left-st.left+B.width/2-8,y1=B.top-st.top+B.height/2-8;
+ p.style.left=x0+'px';p.style.top=y0+'px';$('#stage').appendChild(p);
+ requestAnimationFrame(()=>requestAnimationFrame(()=>{p.style.transform=`translate(${x1-x0}px,${y1-y0}px)`}));
+ setTimeout(()=>{p.style.opacity='0';const d=$('#d-'+b);if(d){d.style.boxShadow=`0 0 0 3px var(--${b.toLowerCase()})`;setTimeout(()=>d.style.boxShadow='',700)}},950);
+ setTimeout(()=>p.remove(),1300)}
+function go(n,fly=true){i=Math.max(0,Math.min(SC[sc].steps.length-1,n));draw(fly)}
+function stop(){clearInterval(timer);timer=null;$('#play').textContent='▶ Tự chạy'}
+$('#prev').onclick=()=>{stop();go(i-1,false)};
+$('#next').onclick=()=>{stop();go(i+1)};
+$('#play').onclick=()=>{if(timer){stop();return}if(i===SC[sc].steps.length-1)go(0);$('#play').textContent='❚❚ Dừng';
+ timer=setInterval(()=>{if(i>=SC[sc].steps.length-1){stop();return}go(i+1)},3200)};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-sc],[data-i]');if(!b)return;stop();
+ if(b.dataset.sc){sc=b.dataset.sc;go(0,false)}else go(+b.dataset.i)});
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){stop();go(i+1)}if(e.key==='ArrowLeft'){stop();go(i-1,false)}});
+draw(false);
+</script>
+</body></html>
