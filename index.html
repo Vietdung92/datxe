@@ -3,7 +3,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="GhépXe">
 <meta name="description" content="Bản demo phần mềm quản lý nhà xe ghép: tổng đài, chủ hãng, tài xế, khách hàng.">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px;font-family:system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
-<script>window.GX_VER='1794628873';window.GX_LABEL='11:01 14/11';window.GX_DB='https://datxe-demo-default-rtdb.asia-southeast1.firebasedatabase.app'</script>
+<script>window.GX_VER='1794703846';window.GX_LABEL='07:50 15/11';window.GX_DB='https://datxe-demo-default-rtdb.asia-southeast1.firebasedatabase.app'</script>
 </head><body>
 <title>GhépXe Demo</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -465,6 +465,32 @@ body::before{background:var(--nav)}
   .kpi .v{font-size:26px}
 }
 .phone .gm-hint{display:none}
+
+.dwrap{display:flex;flex-direction:column}
+#dtabs,#f-name,#f-time{scroll-margin-top:90px}
+.cb-alert{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:0;cursor:pointer;margin-bottom:16px;padding:12px 14px;border-radius:14px;background:linear-gradient(90deg,var(--bad),#f97316);color:#fff;box-shadow:0 8px 24px rgba(220,38,38,.25);font:inherit}
+.cb-alert .ic{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;flex:none;animation:cbp 1.6s infinite}
+.cb-alert b{font-size:15px;display:block}.cb-alert small{opacity:.92;font-size:12.5px}
+.cb-alert .go{margin-left:auto;background:#fff;color:var(--bad);border-radius:999px;padding:6px 12px;font-weight:700;font-size:13px;white-space:nowrap}
+@keyframes cbp{0%{box-shadow:0 0 0 0 rgba(255,255,255,.55)}70%{box-shadow:0 0 0 12px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+.tabs2 .bdg{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 5px;margin-left:5px;border-radius:9px;background:var(--bad);color:#fff;font-size:11px}
+.cbr{display:flex;gap:10px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--surface);align-items:flex-start}
+.cbr.late{border-color:var(--bad);box-shadow:inset 4px 0 0 var(--bad)}
+.cbr .av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;flex:none}
+.cbr .m{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
+.cbr .tl{display:flex;gap:4px;align-items:center;flex-wrap:wrap;font-size:11.5px;color:var(--muted)}
+.cbr .tl i{width:8px;height:8px;border-radius:50%;background:var(--bad);display:inline-block}
+.cbr .bt{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+.cbr .bt .btn{min-height:40px}
+.voice{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.mic{width:84px;height:84px;border-radius:50%;border:0;cursor:pointer;background:var(--accent);color:#fff;display:grid;place-items:center;box-shadow:0 10px 26px rgba(5,150,105,.35)}
+.mic svg{width:36px;height:36px}
+.mic.on{background:var(--bad);animation:cbp2 1.2s infinite}
+@keyframes cbp2{0%{box-shadow:0 0 0 0 rgba(220,38,38,.5)}70%{box-shadow:0 0 0 20px rgba(220,38,38,0)}100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}}
+.voice textarea{width:100%;min-height:74px;font-size:15px}
+.vchips{display:flex;flex-direction:column;gap:6px;width:100%}
+.vchips button{border:1px dashed var(--line);background:var(--surface2);border-radius:10px;padding:8px 10px;text-align:left;font:inherit;font-size:12.5px;color:var(--fg);cursor:pointer}
+@media (max-width:700px){.dwrap .disp{order:1;margin-bottom:16px}.dwrap .map-card{order:2}.dwrap .kpis{order:3}.tabs2 button{padding:12px 10px;font-size:14px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
@@ -526,7 +552,7 @@ const S={
   '0978 221 506':{name:'Trần Văn Khoa',trips:6,last:'02/11',pickup:'Ea Đar',drop:'Sân bay Buôn Ma Thuột',note:'Đi công tác, hay đặt sát giờ.',rating:'Khách tốt'}},
  seq:1053,
  sel:'DH1049',
- dTab:'call',
+ dTab:'back',
  form:{},
  aiFilled:{},
  call:{state:'idle',lines:[],step:0},
@@ -578,6 +604,7 @@ let toastT;
 function toast(m){const r=$('#toast-root');r.innerHTML=`<div class="toast" role="status">${m}</div>`;clearTimeout(toastT);toastT=setTimeout(()=>r.innerHTML='',3200)}
 function modal(html){$('#modal-root').innerHTML=html?`<div class="modal-bg" data-a="bgClose"><div class="modal">${html}</div></div>`:''}
 const ICON={
+ mic:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5M8 22h8"/></svg>',
  phone:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>',
  nav:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>',
  pin:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s7-6.4 7-12a7 7 0 1 0-14 0c0 5.6 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>',
@@ -896,6 +923,83 @@ function after(){initMaps();document.querySelectorAll('canvas[data-qr]').forEach
     const step=now=>{const k=Math.min(1,(now-t0)/750);const e=1-Math.pow(1-k,3);el.textContent=f(end*e);if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)})}
 /* ================== TỔNG ĐÀI ================== */
 function blankForm(src){return {name:'',phone:'',dir:'EK-BMT',time:'',seats:1,pickup:'Chợ Ea Kar',drop:'Ngã Sáu BMT',note:'',luggage:false,source:src||'Hotline'}}
+
+/* ===== Cần gọi lại: gom cuộc gọi nhỡ cùng số (mô phỏng nhật ký cuộc gọi Android) ===== */
+const MISSED_POOL=[['0978 221 506'],['0369 845 120'],['0912 784 033'],['0356 902 418'],['0935 640 117'],['0868 117 295'],['0398 450 662']];
+function seedCB(){const n=Date.now(),m=60000;return [
+  {phone:'0978 221 506',times:[n-9*m,n-6*m,n-2*m],sms:true,done:false},
+  {phone:'0369 845 120',times:[n-5*m,n-3*m],sms:true,done:false},
+  {phone:'0912 784 033',times:[n-1*m],sms:true,done:false}]}
+S.cb=seedCB();S.vText='';
+const cbOpen=()=>S.cb.filter(g=>!g.done).sort((a,b)=>a.times[0]-b.times[0]);
+const ago=t=>Math.max(1,Math.round((Date.now()-t)/60000));
+const hhmm=t=>{const d=new Date(t);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')};
+function cbMissed(phone){const now=Date.now();let g=S.cb.find(x=>x.phone===phone&&!x.done);
+  if(g)g.times.push(now);else{g={phone,times:[now],sms:true,done:false};S.cb.push(g)}return g}
+function cbDone(phone){S.cb.forEach(g=>{if(g.phone===phone)g.done=true})}
+function cbBanner(){const L=cbOpen();if(!L.length)return '';const tot=L.reduce((a,g)=>a+g.times.length,0);
+  return `<button class="cb-alert" data-a="goBack"><span class="ic">${ICON.phone}</span><span><b>${L.length} khách đang chờ gọi lại</b><small>${tot} cuộc gọi nhỡ · người chờ lâu nhất <span data-since="${L[0].times[0]}">${ago(L[0].times[0])}</span> phút</small></span><span class="go">Gọi lại</span></button>`}
+function cbBody(){const L=cbOpen();const doneN=S.cb.filter(g=>g.done).length;
+  const cols=['var(--info)','var(--brand)','var(--warn)','var(--accent)','#7c3aed','#0891b2'];
+  const rows=L.map((g,i)=>{const r=S.regulars[g.phone];const w=ago(g.times[0]);const late=w>=5;
+    return `<div class="cbr ${late?'late':''}"><span class="av" style="background:${r?cols[i%cols.length]:'var(--muted)'}">${r?esc(r.name.split(' ').pop()[0]):'?'}</span>
+     <div class="m"><div class="row between" style="gap:6px"><b>${r?esc(r.name):'Số lạ'}</b><span class="mono small">${g.phone}</span></div>
+      <div class="row" style="gap:5px;flex-wrap:wrap"><span class="pill bad">Gọi ${g.times.length} lần</span><span class="pill ${late?'bad':'warn'}">Chờ <span data-since="${g.times[0]}">${w}</span> phút</span>${g.sms?'<span class="pill info">Đã nhắn tự động</span>':''}</div>
+      <div class="small muted">${r?`Khách quen · ${r.trips} chuyến · hay đi ${esc(short(r.pickup))} → ${esc(short(r.drop))}`:'Khách mới, chưa có lịch sử'}</div>
+      <div class="tl">${g.times.map(t=>`<i></i>${hhmm(t)}`).join(' ')}</div>
+      <div class="bt"><button class="btn primary sm" data-a="cbCall" data-v="${g.phone}">${ICON.phone} Gọi lại</button>${r?`<button class="btn sm" data-a="cbSame" data-v="${g.phone}">Đặt như lần trước</button>`:''}<button class="btn sm ghost" data-a="cbSkip" data-v="${g.phone}">Bỏ qua</button></div></div></div>`}).join('');
+  return `<div class="small muted">Máy giữ hotline (Android) tự đọc nhật ký cuộc gọi. Một số gọi nhiều lần chỉ hiện <b>1 dòng</b>, ai chờ lâu nhất nằm trên cùng. Khách gọi nhỡ nhận tin nhắn tự động "Nhà xe sẽ gọi lại ngay".</div>
+   ${rows||'<div class="empty" style="padding:16px"><div class="ring-ico">'+ICON.phone+'</div>Không còn ai chờ. Mọi cuộc gọi nhỡ đã được gọi lại.</div>'}
+   <div class="row between small"><span class="muted">Đã gọi lại hôm nay: <b>${doneN+11}</b></span><button class="btn sm" data-a="cbSim">+ Mô phỏng 1 cuộc gọi nhỡ</button></div>`}
+/* ===== Đọc chốt đơn: nói 1 câu, app tách thành đơn ===== */
+let REC=null;
+const V_SAMPLES=['Chị Hoa, 2 người, đón chợ Phước An 2 giờ chiều đi bệnh viện tỉnh','Anh Khoa 1 người đón Ea Đar 9 giờ rưỡi ra sân bay, có 1 vali','Cô Tư 3 người từ Ngã Sáu về chợ Ea Kar lúc 4 giờ chiều'];
+function voiceBody(){const sup=!!(window.SpeechRecognition||window.webkitSpeechRecognition);
+  return `<div class="voice"><button class="mic ${REC?'on':''}" data-a="vMic" aria-label="Đọc chốt đơn">${ICON.mic}</button>
+   <div class="small ${REC?'':'muted'}" style="font-weight:600">${REC?'Đang nghe… đọc xong bấm lại để dừng':'Cúp máy xong, bấm micro và đọc 1 câu:<br>tên · số người · giờ · đón ở đâu · đi đâu'}</div>
+   ${S.form.phone?`<div class="pill info">Đang lên đơn cho số ${esc(S.form.phone)}</div>`:''}
+   <textarea id="v-text" class="inp" data-voice placeholder="${sup?'Lời đọc sẽ hiện ở đây. Có thể sửa tay.':'Máy này chưa nghe trực tiếp được: bấm vào đây rồi dùng nút micro trên bàn phím.'}">${esc(S.vText)}</textarea>
+   <button class="btn primary" style="width:100%" data-a="vParse">${ICON.spark} Tách thành đơn</button>
+   <div class="vchips"><span class="small muted" style="text-align:left">Chưa tiện nói? Bấm thử 1 câu mẫu:</span>${V_SAMPLES.map((t,i)=>`<button data-a="vSample" data-v="${i}">“${esc(t)}”</button>`).join('')}</div></div>`}
+function vStart(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){toast('Trình duyệt này chưa nghe trực tiếp được. Bấm vào ô chữ và dùng nút micro trên bàn phím.');const t=$('#v-text');if(t)t.focus();return}
+  let r;try{r=new SR()}catch(e){toast('Không mở được micro trên trình duyệt này.');return}
+  r.lang='vi-VN';r.interimResults=true;r.continuous=false;r.maxAlternatives=1;let err=false;S.vText='';
+  r.onresult=e=>{let t='';for(const x of e.results)t+=x[0].transcript;S.vText=t;const ta=$('#v-text');if(ta)ta.value=t};
+  r.onerror=e=>{err=true;toast(e.error==='not-allowed'||e.error==='service-not-allowed'?'Chưa cho phép dùng micro. Bật quyền micro cho trang này rồi thử lại.':e.error==='no-speech'?'Chưa nghe thấy gì. Nói gần máy hơn rồi thử lại.':'Không nghe được ('+e.error+'). Có thể dùng micro trên bàn phím.')};
+  r.onend=()=>{REC=null;if(!err&&S.vText.trim())vApply();else render()};
+  try{r.start();REC=r;render()}catch(e){toast('Micro đang bận, thử lại sau.')}}
+const VNUM={'mười một':11,'mười hai':12,'một':1,'hai':2,'ba':3,'bốn':4,'năm':5,'sáu':6,'bảy':7,'tám':8,'chín':9,'mười':10};
+const VSTOP=new Set(['ơi','đi','đặt','cần','muốn','ở','lên','về','xuống','có','cho','nha','ạ','là','với','đón','trả','mang','gửi','tên','đây','nè','này','từ','tại','ra','vô','vào','đến','tới','lúc','khoảng','gọi','hỏi','book']);
+function parseVoice(txt){
+  let t=' '+txt.replace(/\s+/g,' ').trim()+' ';
+  Object.entries(VNUM).forEach(([w,n])=>{t=t.replace(new RegExp('(\\s)'+w+'(\\s+(?:người|ghế|khách|vé|chỗ|giờ|vali|thùng|kiện))','giu'),'$1'+n+'$2')});
+  t=t.replace(/(^|[\s,.])(anh|chị|chú|cô|bác|ông|bà|em)\s+(\p{L}+)/giu,(m,a,h,w)=>VSTOP.has(w.toLowerCase())?m:a+h.charAt(0).toUpperCase()+h.slice(1)+' '+w.charAt(0).toUpperCase()+w.slice(1));
+  const {f,got}=parseZalo(t.trim());f.source='Hotline';const low=t.toLowerCase();
+  if(/bao (cả |nguyên )?xe/.test(low)){f.note='Bao cả xe';got.note=1;const lg=low.match(/(\d+\s*)?(thùng|vali|kiện)[^.,]*/);f.luggage=!!lg;if(lg)f.note+='; '+lg[0].trim();else delete got.luggage}
+  const AL=[['phước an','Chợ Phước An'],['sân bay','Sân bay Buôn Ma Thuột'],['bệnh viện','BV Đa khoa tỉnh Đắk Lắk'],['đa khoa','BV Đa khoa tỉnh Đắk Lắk'],['ngã sáu','Ngã Sáu BMT'],['ngã 6','Ngã Sáu BMT'],['ea đar','Ea Đar'],['ea kly','Ea Kly'],['hòa đông','Hòa Đông'],['chợ ea kar','Chợ Ea Kar'],['bến xe','Bến xe Ea Kar'],['ea knốp','Ea Knốp'],['tây nguyên','ĐH Tây Nguyên']];
+  const WEAK=[['ea kar','Chợ Ea Kar'],['buôn ma thuột','Ngã Sáu BMT'],['ban mê','Ngã Sáu BMT'],['bmt','Ngã Sáu BMT']];
+  const hits=[];AL.forEach(([a,p])=>{const i=low.indexOf(a);if(i>=0&&!hits.some(h=>h.p===p))hits.push({i,e:i+a.length,p})});
+  if(hits.length<2)WEAK.forEach(([a,p])=>{const i=low.indexOf(a);if(i>=0&&!hits.some(h=>h.p===p||(i>=h.i&&i<h.e)))hits.push({i,e:i+a.length,p})});
+  hits.sort((a,b)=>a.i-b.i);
+  hits.forEach(h=>{const pre=low.slice(Math.max(0,h.i-14),h.i);h.r=/(trả|tới|đến|vô|vào|về|đi|ra|lên|xuống)\s*(ở|tại|khu)?\s*$/.test(pre)?'drop':/(đón|từ|tại|ở)\s*(ở|tại|khu)?\s*$/.test(pre)?'pick':''});
+  let pk=hits.find(h=>h.r==='pick'),dp=hits.find(h=>h.r==='drop'&&h!==pk);const rest=hits.filter(h=>h!==pk&&h!==dp);
+  if(!pk&&rest.length&&(dp?rest[0].i<dp.i:true))pk=rest.shift();if(!dp&&rest.length)dp=rest.shift();
+  delete got.pickup;delete got.drop;
+  if(pk){f.pickup=pk.p;got.pickup=1}if(dp){f.drop=dp.p;got.drop=1}
+  if(pk&&dp){f.dir=PT(pk.p)>PT(dp.p)?'EK-BMT':'BMT-EK';got.dir=1}
+  if(!got.time&&/(bây giờ|liền|ngay)/.test(low)){const d=new Date(Date.now()+15*60000);f.time=hhmm(d);got.time=1}
+  return {f,got}}
+function vApply(){const {f,got}=parseVoice(S.vText||'');const keys=Object.keys(got).filter(k=>k!=='source');
+  if(!keys.length){render();toast('Chưa tách được thông tin nào. Thử đọc rõ: tên, số người, giờ, nơi đón, nơi trả.');return}
+  const nf={...S.form};keys.forEach(k=>nf[k]=f[k]);if(got.note)nf.luggage=!!f.luggage;
+  const fwd=()=>nf.dir==='EK-BMT'?PT(nf.drop)<PT(nf.pickup):PT(nf.drop)>PT(nf.pickup);
+  if(got.pickup&&!got.drop&&!fwd())nf.drop=nf.dir==='EK-BMT'?'Ngã Sáu BMT':'Chợ Ea Kar';
+  if(got.drop&&!got.pickup&&!fwd())nf.pickup=nf.dir==='EK-BMT'?'Chợ Ea Kar':'Ngã Sáu BMT';
+  if(!nf.source)nf.source='Hotline';S.form=nf;S.aiFilled={...got};delete S.aiFilled.source;render();
+  const miss=['phone','time','pickup'].filter(k=>!nf[k]).map(k=>({phone:'số điện thoại',time:'giờ đón',pickup:'điểm đón'})[k]);
+  toast(`Đã điền ${keys.length} ô từ lời đọc.`+(miss.length?' Còn thiếu: '+miss.join(', ')+'.':' Kiểm tra ô màu xanh rồi bấm Xác nhận tạo đơn.'));
+  setTimeout(()=>{const e=$('#f-name');if(e)e.scrollIntoView({behavior:'smooth',block:'center'})},60)}
 S.form=blankForm();
 function vDispatch(){
   const pend=S.orders.filter(o=>o.status==='Chờ gán');
@@ -907,6 +1011,7 @@ function vDispatch(){
   return `
   <div class="sec-title"><div><h2>Bàn tổng đài</h2><div class="muted small">${esc(S.tenant.name)} · Hotline ${S.tenant.hotline} · Zalo ${S.tenant.zalo} · Thứ Bảy 14/11/2026</div></div>
    <button class="btn primary lg" data-a="incoming">${ICON.phone} Mô phỏng cuộc gọi đến</button></div>
+  <div class="dwrap">${cbBanner()}
   <div class="kpis" style="margin-bottom:16px">
    <div class="kpi"><div class="l">Đơn hôm nay</div><div class="v">${today}</div>${stackBar(ch)}${legend(ch)}</div>
    <div class="kpi"><div class="l">Chờ gán xe</div><div class="v" style="color:${pend.length?'var(--warn)':'var(--ok)'}">${pend.length}</div><div class="row" style="gap:5px;margin-top:6px">${pend.map((o,i)=>`<span title="${esc(o.name)}">${srcIcon(o.source)}</span>`).join('')||'<span class="small muted">Không còn đơn chờ</span>'}</div></div>
@@ -917,7 +1022,7 @@ function vDispatch(){
   <div class="disp">
    <div class="stack">
     <div class="card">
-     <div class="tabs2">${[['call','Cuộc gọi + AI'],['zalo','Dán tin nhắn Zalo'],['quick','Nhập nhanh']].map(([k,l])=>`<button class="${S.dTab===k?'on':''}" data-a="dTab" data-v="${k}">${l}</button>`).join('')}</div>
+     <div class="tabs2" id="dtabs">${[['back','Cần gọi lại'],['voice','Đọc chốt đơn'],['call','Cuộc gọi + AI'],['zalo','Dán Zalo'],['quick','Nhập nhanh']].map(([k,l])=>`<button class="${S.dTab===k?'on':''}" data-a="dTab" data-v="${k}">${k==='voice'?ICON.mic.replace(/18/g,'14')+' ':''}${l}${k==='back'&&cbOpen().length?`<span class="bdg">${cbOpen().length}</span>`:''}</button>`).join('')}</div>
      <div class="card-b stack">${dTabBody()}</div>
     </div>
     <div class="card">
@@ -940,7 +1045,7 @@ function vDispatch(){
        return `<tr><td><span class="plate">${c.plate}</span><div class="small muted">${esc(drv(c.driver).name)}</div></td><td>${carTrack(c)}<div class="small muted">${c.status==='Nghỉ'?'Nghỉ hôm nay':c.status==='Đang chạy'?DIRS[c.dir]:'Chờ bến · xuất '+c.depart}</div></td><td><div class="seats">${seats}</div></td></tr>`}).join('')}
      </tbody></table></div></div>
    </div>
-  </div>`;
+  </div></div>`;
 }
 function formHTML(){
   const f=S.form;const ai=k=>S.aiFilled[k]?' ai':'';
@@ -961,6 +1066,8 @@ function formHTML(){
   <button class="btn primary" data-a="createOrder">Xác nhận tạo đơn</button></div>`;
 }
 function dTabBody(){
+  if(S.dTab==='back') return cbBody();
+  if(S.dTab==='voice') return voiceBody()+formHTML();
   if(S.dTab==='call'){const c=S.call;
     if(c.state==='idle') return `<div class="empty" style="padding:14px"><div class="ring-ico">${ICON.phone}</div>Chưa có cuộc gọi. Khi khách gọi, hồ sơ khách quen hiện ngay; AI nghe, chép lời và tự điền đơn.<div style="margin-top:12px"><button class="btn primary" data-a="incoming">${ICON.phone} Mô phỏng cuộc gọi đến</button></div></div>`+formHTML();
     return `<div class="row between"><span class="${c.state==='talk'?'live':'pill ok'}">${c.state==='talk'?'Đang gọi · AI đang nghe':'Đã kết thúc · 1 phút 12 giây'}</span><span class="mono small">0905 312 448</span></div>
@@ -1046,6 +1153,7 @@ function parseZalo(txt){
 function createOrder(){
   const f=S.form;if(!f.phone||!f.time){toast('Cần có số điện thoại và giờ đón trước khi tạo đơn.');return}
   const id='DH'+(S.seq++);S.orders.push({id,name:f.name||'Khách lẻ',phone:f.phone,seats:+f.seats||1,dir:f.dir,time:f.time,pickup:f.pickup,drop:f.drop,source:f.source,status:'Chờ gán',car:null,note:f.note,pay:'Tiền mặt',luggage:f.luggage});
+  cbDone(f.phone);S.vText='';
   S.sel=id;S.form=blankForm();S.aiFilled={};S.call={state:'idle',lines:[],step:0};clearInterval(callTimer);
   render();toast(`Đã tạo đơn ${id}. Chọn xe ở mục Gợi ý xe phù hợp.`);
 }
@@ -1375,6 +1483,18 @@ document.addEventListener('click',e=>{
    incoming(){startCall()},
    answer(){answerCall()},
    dTab(){S.dTab=v;S.aiFilled={};render()},
+   goBack(){S.dTab='back';render();setTimeout(()=>{const t=$('#dtabs');if(t)t.scrollIntoView({behavior:'smooth',block:'start'})},50)},
+   cbCall(){const r=S.regulars[v];cbDone(v);S.form=blankForm('Hotline');S.form.phone=v;S.aiFilled={phone:1};if(r){S.form.name=r.name;S.aiFilled.name=1}
+     S.vText='';S.dTab='voice';render();toast(`Đang gọi lại ${v}${r?' ('+r.name+')':''}. Nghe xong, bấm micro đọc chốt đơn.`)},
+   cbSame(){const r=S.regulars[v];if(!r)return;cbDone(v);const d=new Date(Date.now()+30*60000);d.setMinutes(d.getMinutes()<30?30:60,0,0);
+     S.form={...blankForm('Hotline'),name:r.name,phone:v,pickup:r.pickup,drop:r.drop,dir:PT(r.pickup)>PT(r.drop)?'EK-BMT':'BMT-EK',time:hhmm(d),note:r.note||''};
+     S.aiFilled={name:1,phone:1,pickup:1,drop:1,dir:1,time:1};S.vText='';S.dTab='voice';render();
+     toast('Đã điền theo chuyến gần nhất của '+r.name+'. Gọi xác nhận giờ, số người rồi bấm Xác nhận tạo đơn.');setTimeout(()=>{const e=$('#f-time');if(e)e.scrollIntoView({behavior:'smooth',block:'center'})},60)},
+   cbSkip(){cbDone(v);render();toast('Đã bỏ qua số '+v+'.')},
+   cbSim(){const pool=MISSED_POOL.map(x=>x[0]);const g=cbMissed(pool[Math.floor(Math.random()*pool.length)]);render();toast(`Cuộc gọi nhỡ từ ${g.phone}${g.times.length>1?' (lần thứ '+g.times.length+')':''}. Đã nhắn tin tự động cho khách.`)},
+   vMic(){if(REC){try{REC.stop()}catch(e){}return}vStart()},
+   vSample(){S.vText=V_SAMPLES[+v];vApply()},
+   vParse(){const t=$('#v-text');if(t)S.vText=t.value;vApply()},
    selOrder(){S.sel=v;render()},
    parseZalo(){const {f,got}=parseZalo($('#zalo-text').value);S.form=f;S.aiFilled=got;render();toast('AI đã tách xong đơn từ tin nhắn. Kiểm tra các ô màu xanh.')},
    quickFill(){const r=[['Nguyễn Thị Lan','0905 312 448','Chợ Phước An','BV Đa khoa tỉnh Đắk Lắk','EK-BMT'],['Trần Văn Khoa','0978 221 506','Ea Đar','Sân bay Buôn Ma Thuột','EK-BMT'],['Hồ Thị Hạnh','0935 640 117','BV Đa khoa tỉnh Đắk Lắk','Chợ Ea Kar','BMT-EK']][+v];
@@ -1423,6 +1543,7 @@ document.addEventListener('click',e=>{
 document.addEventListener('input',e=>{const t=e.target;
   if(t.dataset.f){const k=t.dataset.f;S.form[k]=t.type==='checkbox'?t.checked:t.value;delete S.aiFilled[k];t.classList.remove('ai');const p=$('#f-price');if(p)p.textContent=money(priceOf(S.form))}
   if(t.dataset.zalo!==undefined)S.zaloText=t.value;
+  if(t.dataset.voice!==undefined)S.vText=t.value;
   if(t.dataset.c){S.cust[t.dataset.c]=t.value;if(t.tagName==='SELECT')render()}
 });
 document.addEventListener('change',e=>{const t=e.target;if(t.dataset.f&&t.type==='checkbox'){S.form.luggage=t.checked;const p=$('#f-price');if(p)p.textContent=money(priceOf(S.form))}});
@@ -1437,8 +1558,13 @@ setInterval(()=>{
     if(custCarPos!=null&&o.status!=='Đã đón'){const dlt=pt-custCarPos;custCarPos+=Math.sign(dlt)*Math.min(Math.abs(dlt),.01);C.eta=Math.max(0,Math.round(Math.abs(pt-custCarPos)*75));
       if(C.eta===0&&o.status==='Đã gán'){o.status='Đã đón';if(role==='khach-hang')render()}}
     const el=document.querySelector('[data-live="eta"]');if(el&&o.status!=='Đã đón')el.textContent=C.eta>0?'còn khoảng '+C.eta+' phút':'Xe đang chờ'}
+  document.querySelectorAll('[data-since]').forEach(e=>{const m=String(ago(+e.dataset.since));if(e.textContent!==m)e.textContent=m});
+  if(role==='tong-dai'&&!REC&&!$('#modal-root').innerHTML&&++cbTick>=50){cbTick=0;if(cbOpen().length<5){const pool=MISSED_POOL.map(x=>x[0]);const L=cbOpen();
+    const ph=L.length&&Math.random()<.5?L[Math.floor(Math.random()*L.length)].phone:pool[Math.floor(Math.random()*pool.length)];const g=cbMissed(ph);softRender();
+    toast(`Cuộc gọi nhỡ từ ${g.phone}${g.times.length>1?' (lần thứ '+g.times.length+')':''}. Đã nhắn tin tự động.`)}}
   refreshMaps();
 },1500);
+let cbTick=0;
 
 window.addEventListener('hashchange',route);
 if(ONLINE)netStart();route();fbCount();
